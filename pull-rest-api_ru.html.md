@@ -422,7 +422,7 @@ Content-Type: text/json
    "response": {
       "result_code": 0,
       "refund": {
-         "refund_id": 1,
+         "refund_id": "br1",
          "amount": "5.00",
          "status": "success",
          "error": 0
@@ -446,7 +446,7 @@ Content-Type: text/json
    "response": {
       "result_code": 0,
       "refund": {
-         "refund_id": 1,
+         "refund_id": "br1",
          "amount": "5.00",
          "status": "success",
          "error": 0
@@ -511,7 +511,7 @@ Content-Type: text/json
    "response": {
       "result_code": 0,
       "refund": {
-         "refund_id": 1,
+         "refund_id": "br1",
          "amount": "5.00",
          "status": "success",
          "error": 0
@@ -534,7 +534,7 @@ Content-Type: text/json
    "response": {
       "result_code": 0,
       "refund": {
-         "refund_id": 1,
+         "refund_id": "br1",
          "amount": "5.00",
          "status": "success",
          "error": 0
@@ -1035,7 +1035,7 @@ echo $xmlres;
 151|Ошибка проверки подписи
 300|Ошибка связи с сервером
 
-# Ответы
+# Ответы Pull REST API
 
 ## Операции со счетами {#response_bill}
 
