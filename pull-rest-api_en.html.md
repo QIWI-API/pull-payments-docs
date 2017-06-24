@@ -503,7 +503,7 @@ echo $xmlres;
 ?>
 ~~~
 
-# Responses
+# Pull API Responses
 
 Response may be in XML or JSON format, depending on "Accept" header in request.
 
@@ -586,7 +586,7 @@ Object with operation's result.
  "response": {
   "result_code": 0,
   "refund": {
-    "refund_id": 122swbill,
+    "refund_id": "122swbill",
     "amount": "10.0",
     "status": "processing",
     "error": 0,
