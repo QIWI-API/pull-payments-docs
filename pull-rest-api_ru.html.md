@@ -1115,7 +1115,7 @@ comment|String|Комментарий к счету
  "response": {
   "result_code": 0,
   "refund": {
-    "refund_id": 122swbill,
+    "refund_id": "122swbill",
     "amount": "10.0",
     "status": "processing",
     "error": 0,
