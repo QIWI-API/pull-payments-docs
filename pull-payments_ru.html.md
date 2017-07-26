@@ -23,19 +23,19 @@ toc_footers:
  - <a href='http://pullapi-test.qiwi.com'>Песочница</a>
 
 includes:
-  - pull-payments-api_ru
-  - webform_ru
-  - checkout_ru
-  - notification_ru
-  - responses_ru
-  - statuses_ru
-  - errors_ru
+  - pull-payments/pull-payments-api_ru
+  - pull-payments/webform_ru
+  - pull-payments/checkout_ru
+  - pull-payments/notification_ru
+  - pull-payments/responses_ru
+  - pull-payments/statuses_ru
+  - pull-payments/errors_ru
 
 ---
 
 # Введение {#introduction}
 
-###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/bill-payments-rest-api-docs/blob/master/pullrest_ru.html.md)
+###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pullrest_ru.html.md)
 
 QIWI Wallet Pull API открывает доступ к операциям со счетами в Visa QIWI Wallet из вашего приложения. Поддерживаются следующие операции:
 

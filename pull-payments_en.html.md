@@ -1,9 +1,9 @@
 ---
-title: QIWI Pull REST API 2.1
+title: QIWI Wallet Pull REST API 2.1
 
 search: true
 
-metatitle: QIWI Pull REST API 2.1
+metatitle: QIWI Wallet Pull REST API 2.1
 
 metadescription: This API is to be implemented by a merchant to support Visa QIWI Wallet Pull Payments. Pull payments are those initiated from the merchant’s website, in contrast to Push payments that are initiated in Visa QIWI Wallet interfaces such as web (qiwi.com), mobile applications and self-service terminals.
 
@@ -14,20 +14,54 @@ language_tabs:
   - xml: XML 
   - json: JSON
 
+services:
+ - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
+
 toc_footers:
  - <a href='/'>Home page</a>
  - <a href='http://pullapi-test.qiwi.com'>Sandbox</a>
+
+includes:
+  - pull-payments/pull-payments-api_en
+  - pull-payments/webform_en
+  - pull-payments/checkout_en
+  - pull-payments/notification_en
+  - pull-payments/responses_en
+  - pull-payments/statuses_en
+  - pull-payments/errors_en
+
 ---
 
-# Introduction
+# Introduction {#intro}
+
+###### Last update: 2017-05-31 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pullrest_en.html.md)
 
 This API is to be implemented by a merchant to support Visa QIWI Wallet Pull Payments. Pull payments are those initiated from the merchant’s website, in contrast to Push payments that are initiated in Visa QIWI Wallet interfaces such as web (qiwi.com), mobile applications and self-service terminals.
 
-The following operations are supported: creating invoice, cancelling invoice, making refund for paid invoice, checking invoice payment status and refund payment status.
+The following operations are supported: 
 
-Customers may pay for pull payments from their Visa QIWI Wallet, mobile phone account, Visa/MasterCard or by cash in self-service terminals. 
+* creating invoice, 
+* cancelling invoice, 
+* making refund for paid invoice, 
+* checking invoice payment status and refund payment status.
 
-**API is accessible only after the registration and approvement of the request on https://ishop.qiwi.com.**
+## Payment methods {#payment_methods}
+
+* Customers may pay for pull payments by various methods
+  * on QIWI checkout (bill.qiwi.com)
+  * on [qiwi.com](#https://qiwi.com) site
+    * from their Visa QIWI Wallet, 
+    * from mobile phone account, 
+    * from any Visa/MasterCard card
+  * in QIWI Wallet mobile applications (Android/iOS/Windows Phone)
+    * from their Visa QIWI Wallet, 
+    * from mobile phone account, 
+    * from any Visa/MasterCard
+  * by cash in self-service terminals. 
+
+**API is accessible only after the [registration and approvement of the request](https://ishop.qiwi.com).**
+
+## Integrations
 
 ## Request Content-type  
 
