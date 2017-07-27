@@ -4,7 +4,7 @@
 
 ## Последовательность операций {#steps}
 
-<img src="images/pullrest_1.png" />
+![Operation Flow](images/pullrest_1.png)
 
 * Пользователь формирует заказ на сайте провайдера.
 
@@ -394,7 +394,7 @@ Content-Type: text/json
 
 ### Последовательность операций
 
-<img src="images/pullrest_2.png" />
+![Refund Operation Flow](images/pullrest_2.png)
 
 * Провайдер отправляет запрос на осуществление возврата.
 * Чтобы убедиться, что возврат платежа проведен успешно, можно периодически опрашивать сервис Visa QIWI Wallet о [текущем статусе возврата](#refund_status) до получения финального статуса.

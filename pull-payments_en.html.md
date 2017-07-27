@@ -89,7 +89,7 @@ basic | Merchant service is authorized by API ID and API password generated for 
 
 # Invoicing Operation Flow
 
-<img src="images/pullrest_1_en.png" />
+![Invoicing Operation Flow](images/pullrest_1_en.png)
 
 1. User submits an order on the merchant’s website. 
 2. Merchant sends [Create invoice](#invoice) request to Visa QIWI Wallet server with authorization parameters.
@@ -236,7 +236,7 @@ When the transmitted amount exceeds the initial invoice amount or the amount lef
 
 ## Refund Operation Flow
 
-<img src="images/pullrest_2_en.png" />
+![Refund Operation Flow](images/pullrest_2_en.png)
 
 1. To refund a part of the invoice amount or the full amount, merchant sends a request for refund to Visa QIWI Wallet server.
 2. To make sure that the payment refund has been successfully processed, merchant can periodically request the invoice [refund status](#refund_status) until the final status is received.
