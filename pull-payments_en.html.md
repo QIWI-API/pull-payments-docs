@@ -18,7 +18,7 @@ services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
 toc_footers:
- - <a href='/'>Home page</a>
+ - <a href='/index-en.html'>Home page</a>
  - <a href='http://pullapi-test.qiwi.com'>Sandbox</a>
 
 includes:
