@@ -35,7 +35,7 @@ includes:
 
 # Введение {#introduction}
 
-###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pullrest_ru.html.md)
+###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pull-payments_ru.html.md)
 
 QIWI Wallet Pull API открывает доступ к операциям со счетами в Visa QIWI Wallet из вашего приложения. Поддерживаются следующие операции:
 
