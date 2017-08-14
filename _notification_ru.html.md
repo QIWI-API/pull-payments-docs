@@ -15,7 +15,7 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
   --header "Accept: text/xml"
   --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
   --Authorization: "Basic MjA0Mjp0ZXN0Cg=="
-  -d 'bill_id=BILL- 1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_nam e=TEST&ccy=RUB&comment=test&command=bill'
+  -d 'bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=TEST&ccy=RUB&comment=test&command=bill'
 ~~~
 
 ~~~http
@@ -25,7 +25,7 @@ Accept: application/xml
 Content-type: application/x-www-form-urlencoded
 Authorization: Basic MjA0Mjp0ZXN0Cg==
 
-bill_id=BILL- 1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_nam e=TEST&ccy=RUB&comment=test&command=bill
+bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=TEST&ccy=RUB&comment=test&command=bill
 ~~~
 
 <ul class="nestedList url">
@@ -56,7 +56,7 @@ Aдрес вашего сервера для уведомлений вы мож�
 </ul>
 
 <ul class="nestedList params">
-    <li><h3>Параметры</h3><span>В ссылке на веб-форму указываются параметры счета.</span>
+    <li><h3>Параметры</h3><span>В теле запроса указываются параметры счета.</span>
     </li>
 </ul>
 
@@ -69,7 +69,7 @@ user | Номер Visa QIWI Wallet, на который был выставле�
 prv_name |  Наименование проекта, указанное на сайте ishop.qiwi.com в разделе:"Настройки"->"Данные проекта"->"Короткое наименование" | Number|+
 ccy | Идентификатор валюты (Alpha-3 ISO 4217 код). Может использоваться любая валюта, предусмотренная договором с КИВИ | String(3)|+
 comment | Комментарий к счету | String(255)|+
-commant | `bill` - всегда по умолчанию | String |+
+command | `bill` - всегда по умолчанию | String |+
 
 <h3 class="request">Ответ → POST</h3>
 Ответ на запрос должен быть в формате XML.
