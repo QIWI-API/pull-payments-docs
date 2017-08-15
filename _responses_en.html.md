@@ -1,4 +1,4 @@
-# Responses
+ï»¿# Responses
 
 Response may be in XML or JSON format, depending on "Accept" header in request.
 
@@ -56,7 +56,7 @@ ccy	|String|Currency identifier (Alpha-3 ISO 4217 code)
 originCcy|String|Currency identifier of the invoice (Alpha-3 ISO 4217 code)
 status	|String|Current [invoice status](#status)
 error	|Integer|[Error code](#errors)
-user|String|The Visa QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix.
+user|String|The Visa QIWI Wallet userâ€™s ID, to whom the invoice is issued. It is the userâ€™s phone number with "tel:" prefix.
 comment|String|Comment to the invoice
 
 ## Successful Refund Operations {#response_refund}
@@ -97,7 +97,7 @@ refund_id|String|The refund identifier, unique number in a series of refunds pro
 amount|String|The actual amount of the refund. The rounding up method depends on the original invoice currency.
 status	|String|Current [refund status](#status_refund)
 error	|Integer|[Error code](#errors). **Important!** When the amount of refund exceeds the initial invoice amount or the amount left after the previous refunds, error code 242 is returned.
-user|String|The Visa QIWI Wallet user’s ID, to whom the original invoice is issued. It is the user’s phone number with "tel:" prefix.
+user|String|The Visa QIWI Wallet userâ€™s ID, to whom the original invoice is issued. It is the userâ€™s phone number with "tel:" prefix.
 
 ## Response in Case of Operation's Error {#response_error}
 

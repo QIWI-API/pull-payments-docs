@@ -18,7 +18,7 @@ services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
 toc_footers:
- - <a href='/'>Home page</a>
+ - <a href='/index-en.html'>Home page</a>
  - <a href='http://pullapi-test.qiwi.com'>Sandbox</a>
 
 includes:
@@ -33,6 +33,8 @@ includes:
 ---
 
 # Introduction {#intro}
+
+###### Last update: 2017-05-31 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pull-payments_en.html.md)
 
 This API is to be implemented by a merchant to support Visa QIWI Wallet Pull Payments. Pull payments are those initiated from the merchant’s website, in contrast to Push payments that are initiated in Visa QIWI Wallet interfaces such as web (qiwi.com), mobile applications and self-service terminals.
 
@@ -85,7 +87,7 @@ You can use one of the following integration methods on QIWI Wallet Pull Payment
 
 
 <aside class="notice">
-To obtain service data, visit *Protocols details* - *REST-protocol* section of <a href='http://ishop.qiwi.com'>ishop.qiwi.com</a>.
+To obtain service data, visit <i>Protocols details</i> - <i>REST-protocol</i> section of <a href='http://ishop.qiwi.com'>ishop.qiwi.com</a>.
 </aside>
 
 ## Authorization {#auth}

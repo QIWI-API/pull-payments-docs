@@ -1,4 +1,4 @@
-# Error Codes {#errors}
+﻿# Error Codes {#errors}
 
 <aside class="notice"><b>Fatal</b> means the result will not change with the second and subsequent requests (error is not temporary)</aside> 
 
@@ -10,7 +10,7 @@ Code| Description |Fatal
 78|Operation is forbidden|Y
 150|Authorization error (e.g. invalid login/password)|Y
 152|Protocol is not enabled or protocol is disabled|N
-155|This merchant�s identifier ([API ID](#auth)) is blocked|Y
+155|This merchant’s identifier ([API ID](#auth)) is blocked|Y
 210|Invoice not found|Y
 215|Invoice with this `bill_id` already exists|Y
 241|Invoice amount is less than allowed|Y
