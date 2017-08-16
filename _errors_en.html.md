@@ -1,4 +1,4 @@
-﻿# Error Codes {#errors}
+# Error Codes {#errors}
 
 <aside class="notice"><b>Fatal</b> means the result will not change with the second and subsequent requests (error is not temporary)</aside> 
 

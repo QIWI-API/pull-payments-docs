@@ -1,4 +1,4 @@
-﻿# Responses
+# Responses
 
 Response may be in XML or JSON format, depending on "Accept" header in request.
 
