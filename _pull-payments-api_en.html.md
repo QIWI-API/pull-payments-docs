@@ -1,4 +1,4 @@
-﻿# Pull REST API {#pull_rest_api}
+# Pull REST API {#pull_rest_api}
 
 ###### Last update: 2017-07-11 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_en.html.md)
 
@@ -15,7 +15,7 @@
 
 ## Authorization {#auth_rest_api}
 
-Requests authorization uses HTTP Basic-authorization with [API ID and API password](#auth_param).
+Pull REST API requests are authorized through HTTP Basic-authorization with [API ID and API password](#auth_param).
 
 
 ~~~shell
@@ -184,7 +184,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/sdf23452435"
 
 [Error response](#response_error)
 
-# Cancelling Unpaid Invoice {#cancel}
+## Cancelling Unpaid Invoice {#cancel}
 
 Request cancels unpaid invoice.
 
@@ -243,7 +243,7 @@ status| `rejected` string (cancel status)|String|+
 
 [Error response](#response_error)
 
-# Refunds
+## Refunds
 
 Request processes a full or partial refund to user's Visa QIWI Wallet account, so a reversed transaction with the same currency is created for the initial one.
 
@@ -256,7 +256,7 @@ Merchant can create several refund operations for the same initial invoice provi
 When the transmitted amount exceeds the initial invoice amount or the amount left after the previous refunds, server returns error code 242.
 </aside>
 
-## Refund Operation Flow
+### Refund Operation Flow
 
 ![Refund Invoice REST API](images/pullrest_2_en.png)
 
@@ -264,7 +264,7 @@ When the transmitted amount exceeds the initial invoice amount or the amount lef
 2. To make sure that the payment refund has been successfully processed, merchant can periodically request the invoice [refund status](#refund_status) until the final status is received.
 3. This scenario can be repeated multiple times until the invoice is completely refunded (whole invoice amount has been returned to the user).
 
-## Request Details
+### Request Details
 
 <h3 class="request method">Request → PUT</h3>
 
@@ -321,7 +321,7 @@ amount | The refund amount should be less or equal to the amount of the initial 
 
 [Error response](#response_error)
 
-# Check Refund Status
+## Check Refund Status
 
 Merchant can verify current status of the refund by sending Refund Status GET-request.
 

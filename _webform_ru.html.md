@@ -30,12 +30,12 @@
 ~~~
 
 ~~~http
-GET /order/external/create.action?comm=test&txn_id=0000&from=000000&summ=1.11&successUrl=http%3A%2F%2Ftest.ru%3Fcurrency=643&to=%2B71234567890 HTTP/1.1
+GET /order/external/create.action?txn_id=10000&from=11223&summ=1.11&successUrl=http%3A%2F%2Ftest.ru%3Fcurrency=643&to=%2B71234567890 HTTP/1.1
 Host: bill.qiwi.com
 ~~~
 
 <ul class="nestedList example">
-    <li><h3>Пример без авторизации</h3><span><a>https://bill.qiwi.com/order/external/create.action?comm=test&txn_id=0000&from=000000&summ=1.11&successUrl=http%3A%2F%2Ftest.ru%3Fcurrency=643&to=%2B71234567890</a></span>
+    <li><h3>Пример без авторизации</h3><span><a>https://bill.qiwi.com/order/external/create.action?txn_id=10000&from=11223&summ=1.11&currency=643</a></span>
     </li>
 </ul>
 
@@ -65,12 +65,12 @@ pay_source |Способ оплаты по умолчанию, который н
 ~~~
 
 ~~~http
-GET /order/external/create.action?from=260831&txn_id=q115928&summ=1.12&api_id=46835183&currency=RUB&sign=7d3e8b8df7c8ed70b1089c6a5ae86eddd1ee HTTP/1.1
+GET /order/external/create.action?from=2608&txn_id=q1159&summ=1.12&currency=RUB&api_id=46835183&sign=7d3e8b8df7c8ed70b1089c6a5ae86eddd1ee HTTP/1.1
 Host: bill.qiwi.com
 ~~~
 
 <ul class="nestedList example">
-    <li><h3>Пример c авторизацией</h3><span><a>https://bill.qiwi.com/order/external/create.action?from=260831&txn_id=q115928&summ=1.12&api_id=46835183&currency=RUB&sign=7d3e8b8df7c8ed70b1089c6a5ae86eddd1ee</a></span>
+    <li><h3>Пример c авторизацией</h3><span><a>https://bill.qiwi.com/order/external/create.action?from=26&txn_id=q15&summ=1.12&api_id=4683518&currency=RUB&sign=7d3e8bdf7c8ed70b189cae86ed1e</a></span>
     </li>
 </ul>
 
@@ -82,11 +82,11 @@ Host: bill.qiwi.com
 ---------|--------|---|----
 from | Идентификатор провайдера. Идентификатор указан в настройках HTTP-протокола в личном кабинете провайдера на сайте ishop.qiwi.com|Integer|+
 currency | Идентификатор валюты (Alpha-3 ISO 4217 код). Может использоваться любая валюта, предусмотренная договором с КИВИ | String(3)|+
-to | Идентификатор номера QIWI Wallet, на который выставляется счет (в международном формате). Если не указан, то пользователю на веб-форме  отображается  поле ввода номера телефона. Счет выставляется только после заполнения номера | String(20)|-
 summ | Сумма, на которую выставляется счет. Способ округления зависит от валюты | Number(6.3)|+
 txn_id|Уникальный идентификатор счета в системе провайдера|String(30)|+
 api_id|[Параметры авторизации](#auth_param)|Integer|+
 sign|[Подпись запроса](#http_sign)|String|+
+to | Идентификатор номера QIWI Wallet, на который выставляется счет (в международном формате). Если не указан, то пользователю на веб-форме  отображается  поле ввода номера телефона. Счет выставляется только после заполнения номера | String(20)|-
 comm | Комментарий к счету. Если не указаны данный параметр и параметр `to`, то на веб-форме пользователю отображается поля ввода номера телефона и комментария. Счет выставляется только после заполнения номера| String(255)|-
 lifetime | Дата, до которой счет будет доступен для оплаты. Если счет не будет оплачен до этой даты, ему присваивается финальный статус и последующая оплата станет невозможна.<br> **Внимание! По истечении 45 суток от даты выставления счет автоматически будет переведен в финальный статус.** Если параметр `lifetime` передан в неверном формате или не передан, то по истечении 28 суток от даты выставления счет автоматически будет переведен в финальный статус.|ГГГГ-ММ-ДДTЧЧММ|-
 iframe| Признак отображения страницы в iframe (более компактный вид, удобный для встраивания ее в сайт провайдера).|Логический, `true`/`false`<br>По умолчанию `false`|-

@@ -22,7 +22,7 @@
 
 ## Авторизация {#auth_rest_api}
 
-Запросы мерчанта авторизуются посредством HTTP basic-авторизации. Для авторизации используются [API ID и API password](#auth_param).<br>
+Запросы мерчанта к Pull REST API авторизуются посредством HTTP basic-авторизации. Для авторизации используются [API ID и API password](#auth_param).
 
 
 ~~~shell

@@ -1,4 +1,4 @@
-﻿# Checkout {#checkout_en}
+# Checkout {#checkout_en}
 
 ###### Last update: 2017-07-11 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_en.html.md)
 
@@ -9,6 +9,8 @@ To redirect, HTTP GET-request is used to the following URL:
 `https://bill.qiwi.com/order/external/main.action`
 
 Server opens invoice checkout page. Page contains a number of ways to pay the invoice.
+
+
 
 ## GET Parameters
 
@@ -31,10 +33,10 @@ Redirection occurs when the user pays by Visa QIWI Wallet account balance only.
 </aside>
 
 <aside class="warning">
-Redirection to <i>successUrl</i> does not necessarily mean that invoice is successfully paid. You should wait for the Visa QIWI Wallet’s notification with final invoice status to the merchant’s server before complete the user order. When notifications are not used, you should request the invoice status.
+When redirection to <i>successUrl</i> or <i>failUrl</i> is not completed by some reason, you should wait for the Visa QIWI Wallet’s <a href="#notification_en">notification</a> with final invoice status to the merchant’s server before complete the user order. When notifications are not used, you should <a href="#invoice-status">request the invoice status</a>.
 </aside>
 
-The URL for redirection supplements `order` parameter with its value as the invoice ID taken from the `transaction` parameter of the original Checkout GET-request. Using this parameter, merchant can render the final page depending on the order details.
+The URL for redirection supplements <i>order</i> parameter with its value as the invoice ID taken from the <i>transaction</i> parameter of the original Checkout GET-request. Using this parameter, merchant can render the final page depending on the order details.
 
 ## Example
 

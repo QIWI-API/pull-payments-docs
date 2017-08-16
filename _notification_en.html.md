@@ -1,4 +1,4 @@
-﻿# Notifications {#notification_en}
+# Notifications {#notification_en}
 
 ###### Last update: 2017-07-11 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_en.html.md)
 
@@ -44,7 +44,7 @@ Merchant's server can use [basic-authorization](#basic_notify) or [authorization
 
 <aside class="notice">
 If the client SSL-certificate is self-generated and is not issued by one of the standard certification centers, this certificate should be uploaded to the Visa QIWI Wallet server via the merchant’s console (<b>Certificate</b> field in <b>Settings - Protocols details - REST-protocol</b> section of <a href="https://ishop.qiwi.com">QIWI</a> web site). Certificate must be in one of the following formats:
-<ul><li>PEM (text file with .pem extension) – (Privacy-enhanced Electronic Mail) BASE64 encoded DER certificate placed between `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----` strings.</li>
+<ul><li>PEM (text file with .pem extension) – (Privacy-enhanced Electronic Mail) BASE64 encoded DER certificate placed between <i>-----BEGIN CERTIFICATE-----</i> and <i>-----END CERTIFICATE-----</i> strings.</li>
 <li>DER (binary file with .cer, .crt, .der extensions) – usually in binary DER format, though PEM certificates are also accepted with this extensions.</li></ul>
 
 The merchant's certificate becomes trusted after the upload.

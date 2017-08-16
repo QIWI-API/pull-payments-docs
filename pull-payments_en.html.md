@@ -8,9 +8,9 @@ metatitle: QIWI Wallet Pull REST API 2.1
 metadescription: This API is to be implemented by a merchant to support Visa QIWI Wallet Pull Payments. Pull payments are those initiated from the merchant’s website, in contrast to Push payments that are initiated in Visa QIWI Wallet interfaces such as web (qiwi.com), mobile applications and self-service terminals.
 
 language_tabs:
+  - http: HTTP
   - shell
   - php: PHP
-  - http: HTTP
   - xml: XML 
   - json: JSON
 
@@ -65,7 +65,7 @@ The following operations are supported:
 
 You can use one of the following integration methods on QIWI Wallet Pull Payments API:
 
-* [Online Invoicing Form](#webform) - a web invoicing form on QIWI side. Quick and easy solution for invoicing with limited functions (only invoice issue). Web-form address: 
+* [Online Invoicing Form](#webform_en) - a web invoicing form on QIWI side. Quick and easy solution for invoicing with limited functions (only invoice issue). Web-form address: 
 
 `https://bill.qiwi.com/order/external/create.action`
 
@@ -74,14 +74,14 @@ You can use one of the following integration methods on QIWI Wallet Pull Payment
 ## Service data {#auth_param}
 
 <ul class="nestedList params">
-    <li><h3>Authorization and web form</h3><span>Data can be obtained on<strong>ishop.qiwi.com</strong></span>
+    <li><h3>Authorization and web form</h3><span>Data can be obtained on <a href="https://ishop.qiwi.com">ishop.qiwi.com</a></span>
     </li>
 </ul>
 
 `Parameter|Description|Type|Required
  ---------|--------|---|------
  API_ID | Merchant’s shop unique identifier for Visa QIWI Wallet API | Integer| +
- API_PASSWORD | Visa QIWI Wallet API password corresponding to the API_ID| String | +
+ API_PASSWORD | Password corresponding to the API_ID. Each API_ID has a different password.| String | +
  Shop ID | Merchant's numeric Shop ID | Integer | +
 
 
@@ -90,9 +90,4 @@ You can use one of the following integration methods on QIWI Wallet Pull Payment
 To obtain service data, visit <i>Protocols details</i> - <i>REST-protocol</i> section of <a href='http://ishop.qiwi.com'>ishop.qiwi.com</a>.
 </aside>
 
-## Authorization {#auth}
-
-Type | Description
----|---
-basic | Merchant service is authorized by API ID and API password generated for the merchant's account in https://ishop.qiwi.com.<ul><li>API ID – merchant’s shop unique identifier for Visa QIWI Wallet API, as displayed in API ID parameter of *REST-protocol* section;</li><li>API password – Visa QIWI Wallet API password corresponding to this API ID.</li></ul>
 
