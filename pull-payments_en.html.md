@@ -7,12 +7,6 @@ metatitle: QIWI Wallet Pull REST API 2.1
 
 metadescription: This API is to be implemented by a merchant to support Visa QIWI Wallet Pull Payments. Pull payments are those initiated from the merchant’s website, in contrast to Push payments that are initiated in Visa QIWI Wallet interfaces such as web (qiwi.com), mobile applications and self-service terminals.
 
-language_tabs:
-  - http: HTTP
-  - shell
-  - php: PHP
-  - xml: XML 
-  - json: JSON
 
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>

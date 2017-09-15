@@ -18,16 +18,6 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
   -d 'bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=TEST&ccy=RUB&comment=test&command=bill'
 ~~~
 
-~~~http
-Пример
-POST /qiwi-notify.php HTTP/1.1
-Accept: application/xml
-Content-type: application/x-www-form-urlencoded
-Authorization: Basic MjA0Mjp0ZXN0Cg==
-
-bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=TEST&ccy=RUB&comment=test&command=bill
-~~~
-
 <ul class="nestedList url">
     <li><h3>URL</h3>
     </li>
@@ -39,7 +29,7 @@ Aдрес вашего сервера для уведомлений вы мож�
 <ul class="nestedList notice_image">
    <li><h3>Подробнее</h3>
         <ul>
-           <li><img src="images/pull_rest_notification_url.png" /></li>
+           <li><img src="/images/pull_rest_notification_url.png" /></li>
         </ul>
    </li>
 </ul>
@@ -96,10 +86,6 @@ Content-Type: text/xml
 </aside>
 
 <aside class="notice">
-HTTP-заголовок <i>Content-Type</i> ответа должен быть равен "text/xml". В противном случае уведомление будет считаться неуспешным.
-</aside>
-
-<aside class="notice">
 Рекомендуется возвращать коды результата в соответствии с таблицей <a href="#notify_codes">кодов завершения</a>.
 </aside>
 
@@ -112,7 +98,7 @@ HTTP-заголовок <i>Content-Type</i> ответа должен быть �
 <ul class="nestedList notice_image">
     <li><h3>Подробнее</h3>
         <ul>
-             <li><img src="images/pull_rest_notifications.png"/></li>
+             <li><img src="/images/pull_rest_notifications.png"/></li>
         </ul>
     </li>
 </ul>
@@ -138,7 +124,7 @@ HTTP-заголовок <i>Content-Type</i> ответа должен быть �
 <li>DER (файл с расширением.cer, .crt, .der) – обычно в бинарном формате DER, однако PEM сертификаты также допускаются с таким расширением.</li></ul>
 </aside>
 
-### Basic-авторизация {#basic_notify}
+## Basic-авторизация {#basic_notify}
 
 ~~~http
 POST /qiwi-notify.php HTTP/1.1
@@ -151,17 +137,16 @@ command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B790318
 
 Логин равен <a href="#auth_param">ID магазина.</a> Пароль для basic-авторизации уведомления генерируется автоматически в личном кабинете мерчанта на http://ishop.qiwi.com в разделе "Настройки"->"REST-Протокол".
 
-<ul class="nestedList notice_image">
+<ul class="nestedList">
     <li><h3>Подробнее</h3>
         <ul>
-             <li><img src="images/pull_rest_notifications_pass.png" /></li>
+             <li><img src="/images/pull_rest_notifications_pass.png" /></li>
         </ul>
     </li>
 </ul>
 
 
-
-### Авторизация подписи {#sign_notify}
+## Авторизация по подписи {#sign_notify}
 
 ~~~http
 POST /qiwi-notify.php HTTP/1.1
@@ -200,9 +185,7 @@ command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B7
 4. HMAC-хэш преобразовать из строк в байты с использованием кодировки UTF-8 и base64-преобразовать.
 5. Сравнить значение заголовка X-Api-Signature с результатом 4.
 
-### Пример реализации
-
-Откройте вкладку *PHP* справа.
+## Пример реализации
 
 ~~~php
 <?php

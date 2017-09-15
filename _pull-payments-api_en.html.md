@@ -4,7 +4,7 @@
 
 ## Invoicing Operation Flow
 
-![Pull API Invoicing](images/pullrest_1_en.png)
+![Pull API Invoicing](/images/pullrest_1_en.png)
 
 1. User submits an order on the merchant’s website. 
 2. Merchant sends [Create invoice](#invoice) request to Visa QIWI Wallet server with authorization parameters.
@@ -37,18 +37,9 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/test234578"
   --header "Accept: text/json" --header "Authorization: Basic ***"  
 ~~~
 
-~~~http
-PUT /api/v2/prv/2042/bills/BILL-1 HTTP/1.1
-Accept: text/json
-Authorization: Basic ***
-Host: api.qiwi.com
-Content-Type: application/x-www-form-urlencoded; charset=utf-8
-
-user=tel%3A%2B79031234567%26amount=10.0%26ccy=RUB%26comment=test%26lifetime=2012-11-25T09%3A00%3A00
-~~~
-
 ~~~php
 <?php
+//Example
 //Shop identifier from Merchant details page 
 //https://ishop.qiwi.com/options/http.action
 $SHOP_ID = "21379721";
@@ -145,13 +136,6 @@ prv_name|Merchant’s name| String(100)|N
 
 Merchant can request payment status of the invoice by sending the following GET-request.
 
-~~~http
-GET /api/v2/prv/2042/bills/BILL-1 HTTP/1.1
-Accept: text/json
-Authorization: Basic ***
-Host: api.qiwi.com
-Content-Type: application/x-www-form-urlencoded; charset=utf-8
-~~~
 
 ~~~shell
 user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/sdf23452435"
@@ -187,16 +171,6 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/sdf23452435"
 ## Cancelling Unpaid Invoice {#cancel}
 
 Request cancels unpaid invoice.
-
-~~~http
-PATCH /api/v2/prv/2042/bills/BILL-1 HTTP/1.1
-Accept: text/json
-Authorization: Basic ***
-Host: api.qiwi.com
-Content-Type: application/x-www-form-urlencoded; charset=utf-8
-
-status=rejected
-~~~
 
 ~~~shell
 user@server:~$ curl -X PATCH 
@@ -258,7 +232,7 @@ When the transmitted amount exceeds the initial invoice amount or the amount lef
 
 ### Refund Operation Flow
 
-![Refund Invoice REST API](images/pullrest_2_en.png)
+![Refund Invoice REST API](/images/pullrest_2_en.png)
 
 1. To refund a part of the invoice amount or the full amount, merchant sends a request for refund to Visa QIWI Wallet server.
 2. To make sure that the payment refund has been successfully processed, merchant can periodically request the invoice [refund status](#refund_status) until the final status is received.
@@ -303,16 +277,6 @@ user@server:~$ curl -v -w "%{http_code}" -X PUT
   -d 'amount=10.0'
 ~~~
 
-~~~http
-PUT /api/v2/prv/2042/bills/BILL-1/refund/122swbill HTTP/1.1
-Accept: text/json
-Authorization: Basic ***
-Host: api.qiwi.com
-Content-Type: application/x-www-form-urlencoded; charset=utf-8
-
-amount=10.0
-~~~
-
 Parameter|Description|Type|Required
 ---------|--------|---|------
 amount | The refund amount should be less or equal to the amount of the initial transaction specified in<br> `{bill_id}`. The rounding up method depends on the invoice currency | Number(6.3)|Y
@@ -352,14 +316,6 @@ Merchant can verify current status of the refund by sending Refund Status GET-re
 user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/test234578/refund/122swbill"
   -v -w "%{http_code}" 
   --header "Accept: text/json" --header "Authorization: Basic ***" 
-~~~
-
-~~~http
-GET /api/v2/prv/2042/bills/BILL-1/refund/122swbill HTTP/1.1
-Accept: text/json
-Authorization: Basic ***
-Host: api.qiwi.com
-Content-Type: application/x-www-form-urlencoded; charset=utf-8
 ~~~
 
 [Response parameters](#response_refund)

@@ -50,7 +50,7 @@ If the client SSL-certificate is self-generated and is not issued by one of the 
 The merchant's certificate becomes trusted after the upload.
 </aside>
 
-### Basic-authorization {#basic_notify}
+## Basic-authorization {#basic_notify}
 
 Plain text password basic-authorization. It is recommended to use HTTPS protocol in this case to make request well protected.
 The `Shop ID:Notification password` couple is used where:
@@ -58,7 +58,7 @@ The `Shop ID:Notification password` couple is used where:
 * `Shop ID` – merchant's Shop ID, as displayed in **Shop ID** parameter of **Protocols details - REST-protocol** section of [QIWI](https://ishop.qiwi.com) web site.
 * `Notification password` – password for notifications issued on merchant's registration. Merchant should change it immediately in **Protocols details - REST-protocol** section of [QIWI](https://ishop.qiwi.com) web site (**Change password** button). If necessary, merchant may reset password for notifications at any time.
 
-### Authorization by signature {#sign_notify}
+## Authorization by signature {#sign_notify}
 
 Merchant should enable **Sign** flag in **Protocols details - REST-protocol** section of [QIWI](https://ishop.qiwi.com) web site.
 The HTTP header `X-Api-Signature` is added to the POST-request. Signature is calculated as HMAC algorithm with SHA1-hash function.
@@ -124,7 +124,6 @@ Code|Description
 
 ## Signed Notification Authorization in PHP {#php_apisign}
 
-Open *PHP* tab on the right.
 
 ~~~php
 <?php
