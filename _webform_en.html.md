@@ -51,7 +51,7 @@ Parameter|Description|Type|Required
 from | Merchant identifier ([Shop ID](#auth_param)). Identifier is specified in "HTTP-protocol" part of Settings section of merchant's account on ishop.qiwi.com.|Integer|+
 currency | Invoice currency identifier (in Alpha-3 ISO 4217 code). Any currency may be used if specified in agreement with Visa QIWI Wallet. | String(3)|+
 to | Visa QIWI Wallet client phone number to make the invoice. If not specified, client should enter the phone on the web invoice form.| String(20)|-
-summ | Amount of the invoice. Positive number rounded to 2 or 3 fractional digits. Point as a separator. If not specified, client should enter the amount on the web invoice form.| Number(6.3)|-
+summ | Amount of the invoice. Positive number rounded to two fractional digits. Point as a separator. If not specified, client should enter the amount on the web invoice form.| Number(6.3)|-
 txn_id|Unique invoice number in online merchant store. It is used to identify specific invoice of the merchant.|String(30), Latin letters and digits (without space)|-
 comm | Merchant commentary to the invoice. If not specified and `to` parameter is absent, client may enter the comment with phone number at once on the web form. | String(255)|-
 lifetime | Invoice lifetime (in minutes), counting from invoice creation time. When time is expired, invoice cannot be paid and it would be cancelled. **Important! Invoice will be automatically expired when 45 days is passed after the invoicing date.**|-
@@ -85,7 +85,7 @@ Parameter|Description|Type|Required
 ---------|--------|---|------
 from | Merchant identifier ([Shop ID](#auth_param)). Identifier is specified in "HTTP-protocol" part of Settings section of merchant's account on ishop.qiwi.com.|Integer|+
 currency | Invoice currency identifier (in Alpha-3 ISO 4217 code). Any currency may be used if specified in agreement with Visa QIWI Wallet. | String(3)|+
-summ | Amount of the invoice. Positive number rounded to 2 or 3 fractional digits. Point as a separator. | Number(6.3)|+
+summ | Amount of the invoice. Positive number rounded to two fractional digits. Point as a separator. | Number(6.3)|+
 txn_id|Unique invoice number in online merchant store. It is used to identify specific invoice of the merchant.|String(30)|+
 api_id|[API_ID](#auth_param)|Integer|+
 sign|[Request signature](#http_sign)|String|+

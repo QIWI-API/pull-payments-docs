@@ -1,6 +1,6 @@
 # Pull REST API {#pull_rest_api}
 
-###### Last update: 2017-07-11 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_en.html.md)
+###### Last update: 2017-10-12 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_en.html.md)
 
 ## Invoicing Operation Flow
 
@@ -121,16 +121,14 @@ Request creates new invoice to the specified phone number which conincides with 
 Parameter|Description|Type|Required
 ---------|--------|---|------
 user | The Visa QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String(20)|Y
-amount | The invoice amount. The rounding up method depends on the invoice currency | Number(6.3)|Y
+amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
 ccy | Invoice currency identifier (Alpha-3 ISO 4217 code). Depends on currencies allowed for the merchant. The following values are supported: RUB, EUR, USD, KZT | String(3)|Y
 comment | Comment to the invoice | String(255)|Y
 lifetime | Date and time up to which the invoice is available for payment. If the invoice is not paid by this date it will become void and will be assigned a final status.<br> **Important! Invoice will be automatically expired when 45 days is passed after the invoicing date**|dateTime|Y
-pay_source |If the value is "mobile" the user’s MNO balance will be used as a funding source. If the value is "qw", any other funding source is used available in Visa QIWI Wallet interface. If parameter isn’t present, value "qw" is assumed |String |N 
+pay_source |If the value is `mobile` the user’s MNO balance will be used as a funding source. If the value is `qw`, any other funding source is used available in Visa QIWI Wallet interface. If parameter isn’t present, value `qw` is assumed |String |N
 prv_name|Merchant’s name| String(100)|N
 
 [Response parameters](#response_bill)
-
-[Error response](#response_error)
 
 ## Requesting Invoice Status {#invoice-status}
 
@@ -166,11 +164,9 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/sdf23452435"
 
 [Response parameters](#response_bill)
 
-[Error response](#response_error)
-
 ## Cancelling Unpaid Invoice {#cancel}
 
-Request cancels unpaid invoice.
+Request cancels unpaid invoice provided that its lifetime has not expired yet.
 
 ~~~shell
 user@server:~$ curl -X PATCH 
@@ -214,8 +210,6 @@ Parameter|Value|Type|Required
 status| `rejected` string (cancel status)|String|+
 
 [Response parameters](#response_bill)
-
-[Error response](#response_error)
 
 ## Refunds
 
@@ -279,11 +273,9 @@ user@server:~$ curl -v -w "%{http_code}" -X PUT
 
 Parameter|Description|Type|Required
 ---------|--------|---|------
-amount | The refund amount should be less or equal to the amount of the initial transaction specified in<br> `{bill_id}`. The rounding up method depends on the invoice currency | Number(6.3)|Y
+amount | The refund amount should be less or equal to the amount of the initial transaction specified in<br> `{bill_id}`. The positive number that is rounded down with two decimal places. | Number(6.2)|Y
 
 [Response parameters](#response_refund)
-
-[Error response](#response_error)
 
 ## Check Refund Status
 
@@ -319,5 +311,3 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/test234578/ref
 ~~~
 
 [Response parameters](#response_refund)
-
-[Error response](#response_error)
