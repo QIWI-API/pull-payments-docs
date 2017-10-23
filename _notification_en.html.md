@@ -1,10 +1,138 @@
 # Notifications {#notification_en}
 
-###### Last update: 2017-07-11 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_en.html.md)
+###### Last update: 2017-10-23 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_en.html.md)
 
-Notifications are POST-requests (callbacks) from Visa QIWI Wallet server containing all relevant data of the invoice serialized as HTTP-request parameters (encoded by UTF-8) plus parameter `command=bill`.
+Notification is a POST-request (callback). The request's body contains all relevant data of the invoice serialized as HTTP-request parameters and encoded by UTF-8 plus parameter `command=bill`.
 
 <h3 class="request method">Request → POST</h3>
+
+~~~shell
+Example
+
+user@server:~$ curl "https://service.ru/qiwi-notify.php"
+  -v -w "%{http_code}"
+  -X POST
+  --header "Accept: text/xml"
+  --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
+  --Authorization: "Basic MjA0Mjp0ZXN0Cg=="
+  -d 'bill_id=BILL-1%26status=paid%26pay_date=2016%3A11%3A16T11%3A00%3A15%26amount=1.00%26user=tel%3A%2B79031811737%26prv_name=TEST%26ccy=RUB%26comment=test%26command=bill'
+~~~
+
+<ul class="nestedList url">
+    <li><h3>URL</h3>
+    </li>
+</ul>
+
+<aside class="notice">
+To receive notifications, use **Turn on notifications** flag in **Settings - Protocols details - REST-protocol** section of <a href="ishop.qiwi.com">QIWI partners web site</a>.
+<ul class="nestedList notice_image">
+    <li><h3>Details</h3>
+        <ul>
+             <li><img src="/images/pull_rest_notifications_en.png"/></li>
+        </ul>
+    </li>
+</ul>
+
+Specify notifications server URL in the same section.
+
+<ul class="nestedList notice_image">
+   <li><h3>Details</h3>
+        <ul>
+           <li><img src="/images/pull_rest_notification_url_en.png" /></li>
+        </ul>
+   </li>
+</ul>
+</aside>
+
+
+<ul class="nestedList header">
+    <li><h3>HEADERS</h3>
+        <ul>
+             <li>Authorization: Basic *** - for <a href="#basic_notify">login/password authorization</a></li>
+             <li>X-Api-Signature: *** - for <a href="#sign_notify">digital signature authorization</a></li>
+             <li>Accept: text/json</li>
+             <li>Content-type: application/x-www-form-urlencoded</li>
+        </ul>
+    </li>
+</ul>
+
+<ul class="nestedList params">
+    <li><h3>Parameters</h3><span>Invoice parameters are in the request's body.</span>
+    </li>
+</ul>
+
+Parameter|Description|Type|Required
+---------|--------|---|------
+status | [Current invoice status](#status)|String|Y
+amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
+user | The Visa QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String|Y
+pay_date | Invoice's payment date (if invoice already paid) or empty|DateTime (`YYYY-MM-DDThh:mm:ss`)|Y
+prv_name |  Merchant’s site name specified on ishop.qiwi.com in "Settings"->"Contract/project details"->"Short name" section | String|Y
+ccy | Invoice currency identifier (Alpha-3 ISO 4217 code) | String(3)|Y
+comment | Comment to the invoice | String(255)|Y
+command | Always `bill` by default | String |Y
+
+<h3 class="request">Response ←</h3>
+
+Response must be in XML format.
+
+<ul class="nestedList header">
+    <li><h3>HEADERS</h3>
+        <ul>
+             <li>Content-type: text/xml</li>
+        </ul>
+    </li>
+</ul>
+
+
+<ul class="nestedList params">
+    <li><h3>Parameters</h3>
+    </li>
+</ul>
+
+
+XML Tag|Description
+--------|--------
+result|Grouping tag. Describes notification processing result.
+result_code|Notification result code (positive integer). We recommend that the result codes returned by the merchant be in accordance with [Notification codes table](#notify_codes).
+
+<aside class="warning">
+Any response with result code other than 0 ("Success") and/or HTTP status code other than 200 (OK) will be treated as a temporary error. Thus the server will continue repeating requests with increased time intervals within the next 24 hours (<b>50 attempts in total</b>) until it gets a response with result code 0 ("Success") and HTTP status code 200 (OK).
+</aside>
+
+<aside class="notice">
+If the response with result code 0 ("Success") and HTTP status code 200 has not been received within 24 hours since the first request, Visa QIWI Wallet server will stop sending the requests. The merchant would receive an email  with new invoice status code and indication on the possible technical issues on the merchant’s server side.
+</aside>
+
+<aside class="notice">
+To receive notifications merchant must whitelist following IP subnets connected by 80, 443 ports exclusively:
+
+<li>91.232.230.0/23</li>
+<li>79.142.16.0/20</li>
+</aside>
+
+## Authorization on Merchant's Server {#notifications_auth}
+
+Merchant's server should use [basic-authorization](#basic_notify) or [authorization by signature](#sign_notify). Merchant may also use client SSL certificate verification (self-signed cerificates may be used as well). Visa QIWI Wallet server certificate should be verified in HTTPS requests.
+
+<aside class="notice">
+If the client SSL-certificate is self-generated and is not issued by one of the standard certification centers, this certificate should be uploaded to the Visa QIWI Wallet server via <b>Certificate</b> field in <b>Settings - Protocols details - REST-protocol</b> section of <a href="https://ishop.qiwi.com">QIWI partners</a> web site).
+
+<ul class="nestedList notice_image">
+   <li><h3>Details</h3>
+        <ul>
+           <li><img src="/images/pull_rest_notification_cert_en.png" /></li>
+        </ul>
+   </li>
+</ul>
+
+The merchant's certificate is treated as trusted after the upload. Certificate must be in one of the following formats:
+<ul><li>PEM (text file with .pem extension) – (Privacy-enhanced Electronic Mail) BASE64 encoded DER certificate placed between <i>-----BEGIN CERTIFICATE-----</i> and <i>-----END CERTIFICATE-----</i> strings.</li>
+<li>DER (binary file with .cer, .crt, .der extensions) – usually in binary DER format, though PEM certificates are also accepted with this extensions.</li></ul>
+
+</aside>
+
+## Basic-authorization {#basic_notify}
 
 ~~~http
 POST /qiwi-notify.php HTTP/1.1
@@ -12,118 +140,73 @@ Accept: text/xml
 Content-type: application/x-www-form-urlencoded
 Authorization: Basic ***
 
-bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=Retail_Store&ccy=RUB&comment=test&command=bill
+command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=Retail_Store&ccy=RUB&comment=test
 ~~~
 
-To receive notifications (callbacks on invoice status changing), use **Turn on notifications** flag in **Settings - Protocols details - REST-protocol** section of [QIWI](ishop.qiwi.com) web site. To receive these notifications merchant’s server should accept specific HTTP-requests on ports 80, 443.
+The login is taken from [Shop ID](#auth_param) parameter. To obtain password, click on **Change password** button in **Protocols details - REST-protocol** section of [QIWI partners](https://ishop.qiwi.com) web site.
 
-The notification data are transmitted as `application/x-www-form-urlencoded` content type encoded by UTF-8. Parameters, transmitted in the request body, are URL-encoded. 
-
-<ul class="nestedList header">
-    <li><h3>HEADERS</h3>
+<ul class="nestedList">
+    <li><h3>Details</h3>
         <ul>
-             <li>Authorization: Basic ***</li>
-             <li>Accept: text/json</li>
-             <li>Content-type: application/x-www-form-urlencoded</li>
+             <li><img src="/images/pull_rest_notifications_pass_en.png" /></li>
         </ul>
     </li>
 </ul>
 
-<h3 class="request">Response → POST</h3>
-
-Response must be in XML format.
-
-To receive notifications merchant must whitelist following IP subnets connected by 80, 443 ports exclusively: 
-
-* 91.232.230.0/23
-* 79.142.16.0/20
-
-## Authorization on Merchant's Server
-
-Merchant's server can use [basic-authorization](#basic_notify) or [authorization by signature](#sign_notify). To use HTTPS protocol, merchant's server should support SSL-encryption and client SSL certificate verification.
-
-<aside class="notice">
-If the client SSL-certificate is self-generated and is not issued by one of the standard certification centers, this certificate should be uploaded to the Visa QIWI Wallet server via the merchant’s console (<b>Certificate</b> field in <b>Settings - Protocols details - REST-protocol</b> section of <a href="https://ishop.qiwi.com">QIWI</a> web site). Certificate must be in one of the following formats:
-<ul><li>PEM (text file with .pem extension) – (Privacy-enhanced Electronic Mail) BASE64 encoded DER certificate placed between <i>-----BEGIN CERTIFICATE-----</i> and <i>-----END CERTIFICATE-----</i> strings.</li>
-<li>DER (binary file with .cer, .crt, .der extensions) – usually in binary DER format, though PEM certificates are also accepted with this extensions.</li></ul>
-
-The merchant's certificate becomes trusted after the upload.
-</aside>
-
-## Basic-authorization {#basic_notify}
-
-Plain text password basic-authorization. It is recommended to use HTTPS protocol in this case to make request well protected.
-The `Shop ID:Notification password` couple is used where:
-
-* `Shop ID` – merchant's Shop ID, as displayed in **Shop ID** parameter of **Protocols details - REST-protocol** section of [QIWI](https://ishop.qiwi.com) web site.
-* `Notification password` – password for notifications issued on merchant's registration. Merchant should change it immediately in **Protocols details - REST-protocol** section of [QIWI](https://ishop.qiwi.com) web site (**Change password** button). If necessary, merchant may reset password for notifications at any time.
-
 ## Authorization by signature {#sign_notify}
 
-Merchant should enable **Sign** flag in **Protocols details - REST-protocol** section of [QIWI](https://ishop.qiwi.com) web site.
-The HTTP header `X-Api-Signature` is added to the POST-request. Signature is calculated as HMAC algorithm with SHA1-hash function.
-
-* Parameters are in alphabetical order and byte-encoded.
-* Separator is `|`.
-* Signed are all the parameters in the [request](#invoice).
-* Secret key for signature is [Notification password](#basic_notify) from basic-authorization.
-
-Signature verification algorithm:
-
-1. Prepare a string of all parameters values from the POST-request sorted in alphabetical order and separated by `|`: `{parameter1}|{parameter2}|…` where `{parameter1}`, `{parameter2}` are notification parameters. All parameters should be treated as strings.
-
-2. Transform obtained string and `Notification password` (see [basic-authorization](#basic_notify)) into bytes encoded in UTF-8.
-
-3. Apply HMAC-SHA1 function:
-
-`hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`
-
-Where:
-
-* `Notification_password_bytes` – secret key in bytecodes (Notification password);
-* `Invoice_parameters_bytes` – POST-request in bytecodes;
-* `hash` – hash-function result.
-4. Transform into bytes UTF-8 and Base64-encode Hash HMAC value. Then compare with `X-Api-Signature` header's value.
-
-[Notification handler example](#php_apisign)
-
-## Requirements to the Response for Notification
-
-The response should be in XML format.
-
 ~~~http
-HTTP/1.1 200 OK
-Content-Type: text/xml
+POST /qiwi-notify.php HTTP/1.1
+Accept: text/xml
+Content-type: application/x-www-form-urlencoded
+X-Api-Signature: J4WNfNZd***V5mv2w=
 
-<?xml version="1.0"?> 
-<result>
-<result_code>0</result_code>
-</result>
+command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
 ~~~
 
-`Content-type` HTTP header must be `text/xml` otherwise notification is treated as unsuccessful on Visa QIWI Wallet side.
+<aside class="notice">
+Merchant should enable **Sign** flag in **Protocols details - REST-protocol** section of [QIWI partners](https://ishop.qiwi.com) web site.
 
-In response to the request, the result code must be returned in `<result_code>` tag within `<result>` tag.
+<ul class="nestedList notice_image">
+   <li><h3>Details</h3>
+        <ul>
+           <li><img src="/images/pull_rest_notification_cert.png" /></li>
+        </ul>
+   </li>
+</ul>
+</aside>
 
-In order to help in identifying the reasons of notification errors we recommend that the result codes returned by the merchant be in accordance with [Notification codes table](#notify_codes).
+The HTTP header `X-Api-Signature` with signature is added to the POST-request. Signature is calculated as HMAC algorithm with SHA1-hash function.
 
-Any response with result code other than 0 ("Success") and/or HTTP status code other than 200 (OK) will be treated by Visa QIWI Wallet server as a temporary error. Thus the server will continue repeating requests (notifications) with increased time intervals within next 24 hours (50 attempts in total) until it gets a response with result code 0 ("Success") and HTTP status code 200 (OK).
+* Parameters separator is `|`.
+* Signed are all the parameters in the original [invoice request](#invoice).
+* Parameters are in alphabetical order and UTF-8 byte-encoded.
+* Secret key for signature is the [password](#basic_notify) for notification basic-authorization.
 
-If the response with result code 0 ("Success") and HTTP status code 200 has not been received within 24 hours, Visa QIWI Wallet server will stop sending the requests and will send an email to the merchant with new Invoice status code and indication on the possible technical issues on the merchant’s server side.
+Signature verification algorithm is as follows:
 
-## Notification Codes {#notify_codes}
+1. Prepare a string of all parameters values from the notification POST-request sorted in alphabetical order and separated by `|`:
 
-Code|Description
---------------|--------
-0|Success
-5|The format of the request parameters is incorrect
-13|Database connection error
-150|Incorrect password
-151|Signature authorization failed
-300|Server connection error
+    `{parameter1}|{parameter2}|…`
 
-## Signed Notification Authorization in PHP {#php_apisign}
+    where `{parameter1}` is the value of the notification parameter. All values should be treated as strings.
 
+2. Transform obtained string and password for the notification [basic-authorization](#basic_notify) into bytes encoded in UTF-8.
+3. Apply HMAC-SHA1 function:
+
+    `hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`
+    Where:
+
+    * `Notification_password_bytes` – secret key (bytecoded notification password);
+    * `Invoice_parameters_bytes` – bytecoded POST-request body;
+    * `hash` – hash-function result.
+
+4. Transform HMAC-hash value into bytes with UTF-8 and Base64-encode it.
+5. Compare `X-Api-Signature` header's value with the result of step 4.
+
+## PHP Implementation Example {#php_apisign}
+
+The given PHP example implements notification authorization by signature verification.
 
 ~~~php
 <?php
@@ -191,3 +274,15 @@ XML;
 echo $xmlres;
 ?>
 ~~~
+
+
+## Notification Codes {#notify_codes}
+
+Code|Description
+--------------|--------
+0|Success
+5|The format of the request parameters is incorrect
+13|Database connection error
+150|Incorrect password
+151|Signature authorization failed
+300|Server connection error
