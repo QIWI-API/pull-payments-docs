@@ -99,7 +99,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
 
 Parameter|Description|Type|Required
 ---------|--------|---|------
-user | The Visa QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String(20)|Y
+user | The Visa QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with `tel:` prefix | String(20)|Y
 amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
 ccy | Invoice currency identifier (Alpha-3 ISO 4217 code). Depends on currencies allowed for the merchant. The following values are supported: RUB, EUR, USD, KZT | String(3)|Y
 comment | Comment to the invoice | String(255)|Y
@@ -159,10 +159,13 @@ echo '<br><br><b><a href="'.$url.'">Redirect link to pay for invoice</a></b>';
 
 <h3 class="request">Response ←</h3>
 
-~~~shell
+~~~http
 
 HTTP/1.1 200 OK
 Content-Type: text/json
+~~~
+
+~~~json
 {
   "response": {
      "result_code": 0,
@@ -177,10 +180,14 @@ Content-Type: text/json
      }
   }
 }
+~~~
 
-
+~~~http
 HTTP/1.1 500
 Content-Type: text/json
+~~~
+
+~~~json
 {
  "response": {
   "result_code": 150,
@@ -189,6 +196,40 @@ Content-Type: text/json
 }
 ~~~
 
+~~~http
+
+HTTP/1.1 200 OK
+Content-Type: text/xml
+~~~
+
+~~~xml
+<response>
+   <result_code>0</result_code>
+   <bill>
+    <bill_id>BILL-1</bill_id>
+    <amount>10.00</amount>
+    <originAmount>10.00</originAmount>
+    <ccy>RUB</ccy>
+    <originCcy>RUB</originCcy>
+    <status>rejected<status>
+    <error>0</error>
+    <user>tel:+79161234567</user>
+    <comment>test</comment>
+   </bill>
+</response>
+~~~
+
+~~~http
+HTTP/1.1 500
+Content-Type: text/xml
+~~~
+
+~~~xml
+<response>
+   <result_code>341</result_code>
+   <description>Authorization is failed</description>
+</response>
+~~~
 
 Response format depends on `Accept` header in the request:
 
@@ -255,10 +296,13 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/sdf23452435"
 
 <h3 class="request">Response ←</h3>
 
-~~~shell
+~~~http
 
 HTTP/1.1 200 OK
 Content-Type: text/json
+~~~
+
+~~~json
 {
   "response": {
      "result_code": 0,
@@ -275,10 +319,14 @@ Content-Type: text/json
      }
   }
 }
+~~~
 
-
+~~~http
 HTTP/1.1 500
 Content-Type: text/json
+~~~
+
+~~~json
 {
  "response": {
   "result_code": 150,
@@ -287,10 +335,13 @@ Content-Type: text/json
 }
 ~~~
 
-~~~shell
+~~~http
 
 HTTP/1.1 200 OK
 Content-Type: text/xml
+~~~
+
+~~~xml
 <response>
    <result_code>0</result_code>
    <bill>
@@ -305,10 +356,14 @@ Content-Type: text/xml
     <comment>test</comment>
    </bill>
 </response>
+~~~
 
-
+~~~http
 HTTP/1.1 500
 Content-Type: text/xml
+~~~
+
+~~~xml
 <response>
    <result_code>341</result_code>
    <description>Authorization is failed</description>
@@ -390,10 +445,13 @@ user@server:~$ curl -X PATCH
 
 <h3 class="request">Response ←</h3>
 
-~~~shell
+~~~http
 
 HTTP/1.1 200 OK
 Content-Type: text/json
+~~~
+
+~~~json
 {
   "response": {
      "result_code": 0,
@@ -408,10 +466,14 @@ Content-Type: text/json
      }
   }
 }
+~~~
 
-
+~~~http
 HTTP/1.1 500
 Content-Type: text/json
+~~~
+
+~~~json
 {
  "response": {
   "result_code": 150,
@@ -420,10 +482,13 @@ Content-Type: text/json
 }
 ~~~
 
-~~~shell
+~~~http
 
 HTTP/1.1 200 OK
 Content-Type: text/xml
+~~~
+
+~~~xml
 <response>
    <result_code>0</result_code>
    <bill>
@@ -436,10 +501,14 @@ Content-Type: text/xml
     <comment>test</comment>
    </bill>
 </response>
+~~~
 
-
+~~~http
 HTTP/1.1 500
 Content-Type: text/xml
+~~~
+
+~~~xml
 <response>
    <result_code>341</result_code>
    <description>Authorization is failed</description>
@@ -495,7 +564,7 @@ When the transmitted amount exceeds the initial invoice amount or the amount lef
 
 * Merchant sends a request for refund to Visa QIWI Wallet server.
 * To make sure that the payment refund has been successfully processed, merchant can periodically request the invoice [refund status](#refund_status) until the final status is received.
-3. This scenario can be repeated multiple times until the invoice is completely refunded (whole invoice amount has been returned to the user).
+* This scenario can be repeated multiple times until the invoice is completely refunded (whole invoice amount has been returned to the user).
 
 <h3 class="request method">Request → PUT</h3>
 
@@ -515,12 +584,12 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/
         <ul>
         <strong>Parameters are in the URL pathname:</strong>
              <li><strong>prv_id</strong> - merchant’s Shop ID (numeric value, as displayed in "Shop ID" parameter of "Protocols Settings" section of ishop.qiwi.com web site)</li>
-             <li><strong>bill_id</strong> - invoice identifier</li>
-             <li><strong>refund_id</strong> - refund identifier, a number specific to a series of refunds for the invoice <i>{bill_id}</i> (string of 1 to 9 symbols – any 0-9 digits and upper/lower Latin letters)</li>
+             <li><strong>bill_id</strong> - identifier of the invoice to be refunded</li>
+             <li><strong>refund_id</strong> - the refund identifier, a number specific to a series of refunds for the invoice <i>{bill_id}</i> (string of 1 to 9 symbols – any 0-9 digits and upper/lower Latin letters)</li>
         </ul>
          <ul>
-         <strong>Parameter is in the request body.</strong>
-             <li><strong>amount</strong> - the refund amount. It should be less or equal to the amount of the initial transaction specified in <i>{bill_id}</i>. The positive number that is rounded down with two decimal places.</li>
+         <strong>Parameter is in the request body:</strong>
+             <li><strong>amount</strong> - the refund amount. It should be less or equal to the amount of the original invoice specified in <b>bill_id</b>. The positive number that is rounded down with two decimal places.</li>
         </ul>
     </li>
 </ul>
@@ -538,10 +607,13 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/
 
 <h3 class="request">Response ←</h3>
 
-~~~shell
+~~~http
 
 HTTP/1.1 200 OK
 Content-Type: text/json
+~~~
+
+~~~json
 {
    "response": {
       "result_code": 0,
@@ -553,9 +625,14 @@ Content-Type: text/json
       }
    }
 }
+~~~~
 
+~~~http
 HTTP/1.1 500
 Content-Type: text/json
+~~~
+
+~~~json
 {
  "response": {
   "result_code": 150,
@@ -564,10 +641,13 @@ Content-Type: text/json
 }
 ~~~
 
-~~~shell
+~~~http
 
 HTTP/1.1 200
 Content-Type: text/xml
+~~~
+
+~~~xml
 <response>
   <result_code>0</result_code>
   <refund>
@@ -577,10 +657,14 @@ Content-Type: text/xml
    <error>0</error>
   </refund>
 </response>
+~~~
 
-
+~~~http
 HTTP/1.1 500
 Content-Type: text/xml
+~~~
+
+~~~xml
 <response>
    <result_code>341</result_code>
    <description>Authorization is failed</description>
@@ -610,7 +694,7 @@ refund|Object|Refund data. Returned when `result_code` is zero (successful opera
 refund.refund_id|String|The refund identifier, unique number in a series of refunds processed for a particular invoice
 refund.amount|String|The actual amount of the refund. The positive number that is rounded down with two decimal places.
 refund.status|String|Current [refund status](#status_refund)
-refund.error|Integer|[Error code](#errors). **Important!** When the amount of refund exceeds the initial invoice amount or the amount left after the previous refunds, error code `242` is returned.
+refund.error|Integer|[Error code](#errors).<br>**Important!** When the amount of refund exceeds the initial invoice amount or the amount left after the previous refunds, error code `242` is returned.
 
 ## Check Refund Status
 
@@ -648,10 +732,13 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/
 
 <h3 class="request">Response ←</h3>
 
-~~~shell
+~~~http
 
 HTTP/1.1 200 OK
 Content-Type: text/json
+~~~
+
+~~~json
 {
    "response": {
       "result_code": 0,
@@ -663,9 +750,14 @@ Content-Type: text/json
       }
    }
 }
+~~~
 
+~~~http
 HTTP/1.1 500
 Content-Type: text/json
+~~~
+
+~~~json
 {
  "response": {
   "result_code": 150,
@@ -674,10 +766,13 @@ Content-Type: text/json
 }
 ~~~
 
-~~~shell
+~~~http
 
 HTTP/1.1 200
 Content-Type: text/xml
+~~~
+
+~~~xml
 <response>
   <result_code>0</result_code>
   <refund>
@@ -687,10 +782,15 @@ Content-Type: text/xml
    <error>0</error>
   </refund>
 </response>
+~~~
 
+~~~http
 
 HTTP/1.1 500
 Content-Type: text/xml
+~~~
+
+~~~xml
 <response>
    <result_code>341</result_code>
    <description>Authorization is failed</description>

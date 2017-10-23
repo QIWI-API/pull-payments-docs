@@ -148,7 +148,7 @@ The login is taken from [Shop ID](#auth_param) parameter. To obtain password, cl
 <ul class="nestedList">
     <li><h3>Details</h3>
         <ul>
-             <li><img src="/images/pull_rest_notifications_pass_en.png" /></li>
+             <li><img src="/images/pull_rest_notification_url_en.png" /></li>
         </ul>
     </li>
 </ul>
@@ -165,12 +165,12 @@ command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B7
 ~~~
 
 <aside class="notice">
-Merchant should enable **Sign** flag in **Protocols details - REST-protocol** section of [QIWI partners](https://ishop.qiwi.com) web site.
+Merchant should enable "Sign" flag in <b>Protocols details - REST-protocol</b>section of <a href="https://ishop.qiwi.com">QIWI partners</a> web site.
 
 <ul class="nestedList notice_image">
    <li><h3>Details</h3>
         <ul>
-           <li><img src="/images/pull_rest_notification_cert.png" /></li>
+           <li><img src="/images/pull_rest_notification_cert_en.png" /></li>
         </ul>
    </li>
 </ul>
