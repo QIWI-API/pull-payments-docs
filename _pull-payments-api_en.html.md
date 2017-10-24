@@ -309,7 +309,7 @@ Content-Type: text/json
      "bill": {
         "bill_id": "BILL-1",
         "amount": "10.00",
-        "originAmount": "10.00"
+        "originAmount": "10.00",
         "ccy": "RUB",
         "originCcy": "RUB",
         "status": "waiting",
