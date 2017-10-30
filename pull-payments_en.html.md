@@ -5,7 +5,7 @@ search: true
 
 metatitle: QIWI Wallet Pull REST API 2.1
 
-metadescription: This API is to be implemented by a merchant to support Visa QIWI Wallet Pull Payments. Pull payments are those initiated from the merchant’s website, in contrast to Push payments that are initiated in Visa QIWI Wallet interfaces such as web (qiwi.com), mobile applications and self-service terminals.
+metadescription: This API provides access to operations with invoices in Visa QIWI Wallet service. Invoice is the unique request for the payment. The user may pay the invoice with any accessible means till the invoice expired. API supports creating invoices, cancelling unpaid invoices, making refunds for paid invoices (when a user rejects merchant's good or service), checking operation's status.
 
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>

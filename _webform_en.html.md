@@ -54,7 +54,7 @@ comm | Merchant commentary to the invoice. If not specified and `to` parameter i
 lifetime | Invoice lifetime (in minutes), counting from invoice creation time. When time is expired, invoice cannot be paid and it would be cancelled. **Important! Invoice will be automatically expired when 45 days is passed after the invoicing date.**|-
 iframe| This parameter (if `true`) means that invoice page would be opened in "iframe". Page view is tight and easily framed into merchant's site.|Boolean, `true`/`false`<br>`false` by default|-
 successUrl|The URL to which the user will be redirected in case of successful creation of Visa QIWI Wallet transaction. May be parameter or anchor. URL must be within merchant's site. **Redirection is performed when user pays by Visa QIWI Wallet account's balance only.**|URL-encoded string|-
-failUrl|The URL to which the user will be redirected in case of successful creation of Visa QIWI Wallet transaction. Client is redirected to the specified URL when Visa QIWI Wallet transaction creation is unsuccessful. May be parameter or anchor. URL must be within merchant's site. **Redirection is performed when user pays by Visa QIWI Wallet account's balance only.** |URL-encoded string|-
+failUrl|The user is redirected to the specified URL when Visa QIWI Wallet transaction creation is unsuccessful. May be parameter or anchor. URL must be within merchant's site. **Redirection is performed when user pays by Visa QIWI Wallet account's balance only.** |URL-encoded string|-
 target|This parameter means that hyperlink specified in `successUrl` / `failUrl` parameter opens in "iframe". Void if absent|String (`iframe` only)|-
 pay_source |Default payment method to show first for the client on QIWI Checkout. Possible values:<br>`qw` – Visa QIWI Wallet account;<br> `mobile` – client’s cell phone account;<br> `card` – a credit/debit card;<br> `wm` – WebMoney wallet if linked to Visa QIWI Wallet account; <br> `ssk` – payment by cash in a QIWI Terminal.<br>When specified method is inaccessible, the page contains notice about it and the client can choose another method. |String (predefined)|-
 
@@ -105,7 +105,7 @@ To get signature, use API password - a password corresponding to <a href='#auth_
 
 Signature algorithm follows:
 
-1. Get a string with values of all required parameters of the GET-request and `lifetime` parameter (if exists) in alphabetical order separated by `|` symbol:
+1. Get a string with values of all **required** parameters of the GET-request and `lifetime` parameter (**if exists in the request**) in alphabetical order separated by `|` symbol:
 
     `Invoice_parameters = "{api_id}|{currency}|{from}|{lifetime}|{summ}|{txn_id}"`
     Where `{parameter}` is a value of the corresponding parameter.

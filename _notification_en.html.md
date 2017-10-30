@@ -178,7 +178,7 @@ Merchant should enable "Sign" flag in <b>Protocols details - REST-protocol</b>se
 
 The HTTP header `X-Api-Signature` with signature is added to the POST-request. Signature is calculated as HMAC algorithm with SHA1-hash function.
 
-* Parameters separator is `|`.
+* Parameters' separator is `|`.
 * Signed are all the parameters in the original [invoice request](#invoice).
 * Parameters are in alphabetical order and UTF-8 byte-encoded.
 * Secret key for signature is the [password](#basic_notify) for notification basic-authorization.
