@@ -17,7 +17,6 @@ services:
 
 toc_footers:
  - <a href='/'>На главную</a>
- - <a href='http://pullapi-test.qiwi.com'>Песочница</a>
 
 includes:
   - pull-payments/pull-payments-api_ru
