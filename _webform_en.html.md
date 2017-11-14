@@ -1,6 +1,6 @@
 # Online Invoicing Web Form {#webform_en}
 
-###### Last update: 2017-10-20 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_webform_en.html.md)
+###### Last update: 2017-11-10 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_webform_en.html.md)
 
 
 Client receives a web form with selection of appropriate payment methods for the invoice.
@@ -34,11 +34,6 @@ GET /order/external/create.action?txn_id=10000&from=11223&summ=1.11&currency=643
 Host: bill.qiwi.com
 ~~~
 
-<ul class="nestedList example">
-    <li><h3>Example without authorization</h3><span><a>https://bill.qiwi.com/order/external/create.action?txn_id=10000&from=11223&summ=1.11&currency=643</a></span>
-    </li>
-</ul>
-
 <ul class="nestedList params">
     <li><h3>Parameters</h3><span>Invoice parameters are specified in the web form URL.</span></li>
 </ul>
@@ -52,7 +47,6 @@ summ | Amount of the invoice. Positive number rounded to two fractional digits. 
 txn_id|Unique invoice number in online merchant store. It is used to identify specific invoice of the merchant.|String(30), Latin letters and digits (without space)|-
 comm | Merchant commentary to the invoice. If not specified and `to` parameter is absent, client may enter the comment with phone number at once on the web form. | String(255)|-
 lifetime | Invoice lifetime (in minutes), counting from invoice creation time. When time is expired, invoice cannot be paid and it would be cancelled. **Important! Invoice will be automatically expired when 45 days is passed after the invoicing date.**|-
-iframe| This parameter (if `true`) means that invoice page would be opened in "iframe". Page view is tight and easily framed into merchant's site.|Boolean, `true`/`false`<br>`false` by default|-
 successUrl|The URL to which the user will be redirected in case of successful creation of Visa QIWI Wallet transaction. May be parameter or anchor. URL must be within merchant's site. **Redirection is performed when user pays by Visa QIWI Wallet account's balance only.**|URL-encoded string|-
 failUrl|The user is redirected to the specified URL when Visa QIWI Wallet transaction creation is unsuccessful. May be parameter or anchor. URL must be within merchant's site. **Redirection is performed when user pays by Visa QIWI Wallet account's balance only.** |URL-encoded string|-
 target|This parameter means that hyperlink specified in `successUrl` / `failUrl` parameter opens in "iframe". Void if absent|String (`iframe` only)|-
@@ -69,11 +63,6 @@ GET /order/external/create.action?from=260831&txn_id=q115928&summ=1.12&api_id=46
 Host: bill.qiwi.com
 ~~~
 
-<ul class="nestedList example">
-    <li><h3>Example with merchant's authorization</h3><span><a>https://bill.qiwi.com/order/external/create.action?from=2608&txn_id=q1159&summ=1.12&api_id=46835183&currency=RUB&sign=7d3e8b8df70b1089c6a5ae86eddd1ee</a></span>
-    </li>
-</ul>
-
 <ul class="nestedList params">
     <li><h3>Parameters</h3><span>Invoice parameters are specified in the web form URL.</span></li>
 </ul>
@@ -89,7 +78,6 @@ sign|[Request signature](#http_sign)|String|+
 to | Visa QIWI Wallet client phone number to make the invoice. If not specified, client should enter the phone on the web invoice form. **Important! Parameter is not included into the request signature** | String(20)|-
 comm | Merchant commentary to the invoice. If not specified and `to` parameter is also void, client may enter the comment with phone number at once on the web form. | String(255)|-
 lifetime | Date/time when invoice will be expired. After that date, invoice cannot be paid and it would be expired. Maximum period before invoice expiration is 45 days. When parameter is greater, then expiration date would set to 45 days. Parameter is included into the [request signature](#http_sign). **Important! If `lifetime` parameter is in wrong format or missing, invoice will be automatically expired when 28 days are passed from the invoice creation.**|YYYY-MM-DDTHHMM|-
-iframe| This parameter (if true) means that invoice page would be opened in "iframe". Page view is tight and easily framed into merchant's site.|Boolean, `true`/`false`<br>`false` by default|-
 successUrl|The URL to which the user will be redirected in case of successful creation of Visa QIWI Wallet transaction. May be parameter or anchor. URL must be within merchant's site. **Redirection is performed when user pays by Visa QIWI Wallet balance from Visa QIWI Wallet site only.**|URL-encoded string|-
 failUrl|The URL to which the user will be redirected in case of successful creation of Visa QIWI Wallet transaction Client is redirected to the specified URL when Visa QIWI Wallet transaction creation is unsuccessful. May be parameter or anchor. URL must be within merchant's site. **Redirection is performed when user pays by Visa QIWI Wallet balance from Visa QIWI Wallet site only.** |URL-encoded string|-
 target|This parameter means that hyperlink specified in `successUrl` / `failUrl` parameter opens in "iframe". Void if absent|String (`iframe` only)|-
