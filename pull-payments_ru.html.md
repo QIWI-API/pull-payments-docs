@@ -8,7 +8,7 @@ metatitle: QIWI Wallet Pull REST API 2.1
 metadescription: QIWI Wallet Pull API открывает доступ к операциям со счетами в Visa QIWI Wallet из вашего приложения. Поддерживаются операции выставления и отмены счетов, возврата средств по счетам, а также проверки статуса выполнения операций.
 
 language_tabs:
-  - shell
+  - http
   - php
 
 services:

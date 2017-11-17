@@ -64,8 +64,57 @@ user@server:~$ curl "адрес сервера"
 ## Выставление счета за покупку {#invoice_rest}
 
 
-Запрос выставляет новый счет на указанный номер телефона (номер кошелька QIWI Wallet). Тип запроса - HTTP PUT.
+Запрос выставляет новый счет на указанный номер телефона (номер кошелька QIWI Wallet).
 
+~~~php
+<?php
+//Пример реализации запроса на PHP
+//Идентификатор магазина из вкладки "Данные магазина"
+//https://ishop.qiwi.com/options/http.action
+$SHOP_ID = "21379721";
+//API ID из вкладки "Данные магазина"
+//https://ishop.qiwi.com/options/rest.action
+$REST_ID = "62573819";
+//API пароль из вкладки "Данные магазина"
+//https://ishop.qiwi.com/options/rest.action
+$PWD = "**********";
+//ID счета
+$BILL_ID = "99111-ABCD-1-2-1";
+$PHONE = "79191234567";
+
+$data = array(
+    "user" => "tel:+" . $PHONE,
+    "amount" => "1000.00",
+    "ccy" => "RUB",
+    "comment" => "Все очень хорошо",
+    "lifetime" => "2015-01-30T15:35:00",
+    "pay_source" => "qw",
+    "prv_name" => "Хороший магазин"
+);
+
+$ch = curl_init('https://api.qiwi.com/api/v2/prv/'.$SHOP_ID.'/bills/'.$BILL_ID);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+curl_setopt($ch, CURLOPT_USERPWD, $REST_ID.":".$PWD);
+curl_setopt($ch, CURLOPT_HTTPHEADER,array (
+    "Accept: application/json"
+));
+$results = curl_exec ($ch) or die(curl_error($ch));
+echo $results;
+echo curl_error($ch);
+curl_close ($ch);
+//Необязательный редирект пользователя
+$url = 'https://bill.qiwi.com/order/external/main.action?shop='.$SHOP_ID.'&
+transaction='.$BILL_ID.'&successUrl=http%3A%2F%2Fieast.ru%2Findex.php%3Froute%3D
+payment%2Fqiwi%2Fsuccess&failUrl=http%3A%2F%2Fieast.ru%2Findex.php%3Froute%3D
+payment%2Fqiwi%2Ffail&pay_source=card';
+echo '<br><br><b><a href="'.$url.'">Ссылка переадресации для оплаты счета</a></b>';
+?>
+~~~
 
 <h3 class="request method">Запрос → PUT</h3>
 
@@ -73,8 +122,7 @@ user@server:~$ curl "адрес сервера"
   user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
     -X PUT --header "Accept: text/json"
     --header "Authorization: Basic ***"
-    -d 'user=tel%3A%2B79031234567&amount=10.00&ccy=RUB&comment=test&lifetime=2016-09-25T15:00:00'
-
+    -d "user=tel%3A%2B79031234567&amount=10.00&ccy=RUB&comment=test&lifetime=2016-09-25T15:00:00"
 ~~~
 
 <ul class="nestedList url">
@@ -180,58 +228,6 @@ bill.error|Integer|Константа, всегда `0`
 bill.user|String|Идентификатор кошелька пользователя, которому выставлен счет (номер телефона в международном формате с префиксом `tel:`)
 bill.comment|String|Комментарий к счету
 
-~~~php
-
-<?php
-//Пример реализации запроса на PHP
-//Идентификатор магазина из вкладки "Данные магазина"
-//https://ishop.qiwi.com/options/http.action
-$SHOP_ID = "21379721";
-//API ID из вкладки "Данные магазина"
-//https://ishop.qiwi.com/options/rest.action
-$REST_ID = "62573819";
-//API пароль из вкладки "Данные магазина"
-//https://ishop.qiwi.com/options/rest.action
-$PWD = "**********";
-//ID счета
-$BILL_ID = "99111-ABCD-1-2-1";
-$PHONE = "79191234567";
-
-$data = array(
-    "user" => "tel:+" . $PHONE,
-    "amount" => "1000.00",
-    "ccy" => "RUB",
-    "comment" => "Все очень хорошо",
-    "lifetime" => "2015-01-30T15:35:00",
-    "pay_source" => "qw",
-    "prv_name" => "Хороший магазин"
-);
-
-$ch = curl_init('https://api.qiwi.com/api/v2/prv/'.$SHOP_ID.'/bills/'.$BILL_ID);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-curl_setopt($ch, CURLOPT_USERPWD, $REST_ID.":".$PWD);
-curl_setopt($ch, CURLOPT_HTTPHEADER,array (
-    "Accept: application/json"
-));
-$results = curl_exec ($ch) or die(curl_error($ch));
-echo $results;
-echo curl_error($ch);
-curl_close ($ch);
-//Необязательный редирект пользователя
-$url = 'https://bill.qiwi.com/order/external/main.action?shop='.$SHOP_ID.'&
-transaction='.$BILL_ID.'&successUrl=http%3A%2F%2Fieast.ru%2Findex.php%3Froute%3D
-payment%2Fqiwi%2Fsuccess&failUrl=http%3A%2F%2Fieast.ru%2Findex.php%3Froute%3D
-payment%2Fqiwi%2Ffail&pay_source=card';
-echo '<br><br><b><a href="'.$url.'">Ссылка переадресации для оплаты счета</a></b>';
-?>
-~~~
-
-
 
 
 ## Проверка статуса оплаты счета {#invoice-status}
@@ -244,7 +240,6 @@ echo '<br><br><b><a href="'.$url.'">Ссылка переадресации дл
 user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
   --header "Authorization: Basic ***"
   --header "Accept: text/json"
-
 ~~~
 
 <ul class="nestedList url">
@@ -342,8 +337,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
   --header "Authorization: Basic ***"
   --header "Accept: text/json"
   --header "Content-type: application/x-www-form-urlencoded; charset=utf-8"
-  -d 'status=rejected'
-
+  -d "status=rejected"
 ~~~
 
 <ul class="nestedList url">
@@ -447,7 +441,9 @@ bill.comment|String|Комментарий к счету
 ![Refund Operation Flow](/images/pullrest_2.png)
 
 * Провайдер отправляет запрос на осуществление возврата.
+
 * Чтобы убедиться, что возврат платежа проведен успешно, можно периодически опрашивать сервис Visa QIWI Wallet о [текущем статусе возврата](#refund_status) до получения финального статуса.
+
 * Данный сценарий можно повторять несколько раз до тех пор, пока счет не будет полностью отменен (возвращена вся сумма).
 
 <h3 class="request method">Запрос → PUT</h3>
@@ -459,8 +455,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/
   --header "Accept: text/json"
   --header "Authorization: Basic ***"
   --header "Content-type: application/x-www-form-urlencoded; charset=utf-8"
-  -d 'amount=5.0'
-
+  -d "amount=5.0"
 ~~~
 
 <ul class="nestedList url">
@@ -553,7 +548,6 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/
   -v -w "%{http_code}"
   --header "Accept: text/json"
   --header "Authorization: Basic ***"
-
 ~~~
 
 <ul class="nestedList url">

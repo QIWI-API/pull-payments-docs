@@ -11,11 +11,10 @@
 
 user@server:~$ curl "https://service.ru/qiwi-notify.php"
   -v -w "%{http_code}"
-  -X POST
-  --header "Accept: text/xml"
+  -X POST --header "Accept: text/xml"
   --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
   --Authorization: "Basic MjA0Mjp0ZXN0Cg=="
-  -d 'bill_id=BILL-1%26status=paid%26pay_date=2016%3A11%3A16T11%3A00%3A15%26amount=1.00%26user=tel%3A%2B79031811737%26prv_name=TEST%26ccy=RUB%26comment=test%26command=bill'
+  -d "bill_id=BILL-1%26status=paid%26pay_date=2016%3A11%3A16T11%3A00%3A15%26amount=1.00%26user=tel%3A%2B79031811737%26prv_name=TEST%26ccy=RUB%26comment=test%26command=bill"
 ~~~
 
 <ul class="nestedList url">
@@ -147,6 +146,7 @@ POST /qiwi-notify.php HTTP/1.1
 Accept: text/xml
 Content-type: application/x-www-form-urlencoded
 Authorization: Basic ***
+Host: service.ru
 
 command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=Retail_Store&ccy=RUB&comment=test
 ~~~
@@ -169,6 +169,7 @@ POST /qiwi-notify.php HTTP/1.1
 Accept: text/xml
 Content-type: application/x-www-form-urlencoded
 X-Api-Signature: J4WNfNZd***V5mv2w=
+Host: service.ru
 
 command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
 ~~~
@@ -215,7 +216,7 @@ command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B7
 
 ## Пример реализации
 
-Пример на языке PHP реализует авторизацию уведомлений Visa QIWI Wallet с проверкой цифровой подписи.
+Пример на языке PHP реализует авторизацию уведомлений Visa QIWI Wallet с проверкой цифровой подписи. Откройте вкладку _PHP_ справа.
 
 ~~~php
 <?php

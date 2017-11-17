@@ -2,7 +2,24 @@
 
 ###### Last update: 2017-07-11 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_en.html.md)
 
-Merchant may offer the user to pay the invoice immediately by redirecting to the Visa QIWI Wallet Сheckout page via the HTTP GET-request to the following URL:
+Merchant may offer the user to pay the invoice immediately by redirecting to the Visa QIWI Wallet Сheckout page.
+
+~~~http
+QIWI Checkout page
+
+GET /order/external/main.action?shop=2042&transaction=1234567&successUrl=http%3A%2F%2Fmystore.com%2Fsuccess%3Fa%3D1%26b%3D2&failUrl=http%3A%2F%2Fmystore.com%2Ffail%3Fa%3D1%26b%3D2&pay_source=qw HTTP/1.1
+Host: bill.qiwi.com
+
+Redirect when transaction is successfully created
+
+GET /success?a=1&b=2&order=1234567 HTTP/1.1
+Host: mystore.com
+
+Redirect when creation of transaction is unsuccessful
+
+GET /fail?a=1&b=2&order=1234567 HTTP/1.1
+Host: mystore.com
+~~~
 
 <h3 class="request method">Request → REDIRECT</h3>
 
@@ -35,28 +52,12 @@ pay_source |string| Default payment method to show first on the page for the use
 
 ## Redirection to Merchan't Site {#status-links}
 
-<aside class="notice">
 If the checkout page URL contains `successUrl` or `failUrl` parameter, the Visa QIWI Wallet site redirects the user back to the corresponding URL after completing the payment process. <b>Redirection occurs when the user pays by Visa QIWI Wallet account balance only</b>.
+
+<aside class="notice">
+The URL for redirection supplements <i>order</i> parameter with its value as the original merchant's invoice ID. Using this parameter, the merchant can render the final page depending on the order details.
 </aside>
 
 <aside class="warning">
 When redirection to <i>successUrl</i> or <i>failUrl</i> is not completed by some reason, you should wait for the Visa QIWI Wallet’s <a href="#notification_en">notification</a> with final invoice status to the merchant’s server before complete the user order. When notifications are not used, you should <a href="#invoice-status">request the invoice status</a>.
 </aside>
-
-The URL for redirection supplements <i>order</i> parameter with its value as the original merchant's invoice ID. Using this parameter, the merchant can render the final page depending on the order details.
-
-## Example
-
-* Merchant redirects to URL:
-
-    * `https://bill.qiwi.com/order/external/main.action?shop=2042&transaction=123123123&successUrl=http%3A%2F%2Fmystore.com%2Fsuccess%3Fa%3D1%26b%3D2&failUrl=http%3A%2F%2Fmystore.com%2Ffail%3Fa%3D1%26b%3D2&iframe=true&target=iframe`
-
-* User pays the invoice by Visa QIWI Wallet balance on the Checkout page (renders as iframe) and completes payment process.
-
-* If transaction is successfully created, Checkout page redirects Customer to
-
-    * `http://mystore.com/success?a=1&b=2&order=123123123` (renders as iframe)
-
-* If creation of transaction is unsuccessful, Checkout page redirects Customer to
-
-    * `http://mystore.com/fail?a=1&b=2&order=123123123` (renders as iframe)

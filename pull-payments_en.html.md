@@ -7,6 +7,10 @@ metatitle: QIWI Wallet Pull REST API 2.1
 
 metadescription: This API provides access to operations with invoices in Visa QIWI Wallet service. Invoice is the unique request for the payment. The user may pay the invoice with any accessible means till the invoice expired. API supports creating invoices, cancelling unpaid invoices, making refunds for paid invoices (when a user rejects merchant's good or service), checking operation's status.
 
+language_tabs:
+  - http
+  - php
+
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 

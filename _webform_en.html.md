@@ -11,11 +11,15 @@ Client receives a web form with selection of appropriate payment methods for the
 
 ## Operations flow
 
-1. User submits an order on the merchant’s website.
-2. Merchant calls invoicing web form. A call may use merchant's authorization parameters. When calling is without phone number, a user enters the number on the web form.
-3. When invoicing was successfull, the user is immediately redirected to [QIWI Checkout](#checkout_en) page.
-4. If merchant enables [notifications](#notification_en), then Visa QIWI Wallet sends to the merchant's server a notification on the invoice status once invoice is paid or cancelled by the user. Authorization on the merchant's side is required for notifications.
-6. Merchant delivers ordered services/goods when the invoice payment is confirmed.
+* User submits an order on the merchant’s website.
+
+* Merchant calls Invoicing Web form. A call may use merchant's authorization parameters. When calling is without phone number, a user enters the number on the web form.
+
+* When invoicing was successfull, the user is immediately redirected to [QIWI Checkout](#checkout_en) page.
+
+* If merchant enables [notifications](#notification_en), then Visa QIWI Wallet sends to the merchant's server a notification on the invoice status once invoice is paid or cancelled by the user. Authorization on the merchant's side is required for notifications.
+
+* Merchant delivers ordered services/goods when the invoice payment is confirmed.
 
 <h3 class="request method">Request → REDIRECT</h3>
 
@@ -30,7 +34,7 @@ Client receives a web form with selection of appropriate payment methods for the
 ~~~
 
 ~~~http
-GET /order/external/create.action?txn_id=10000&from=11223&summ=1.11&currency=643&to=%2B71234567890 HTTP/1.1
+GET /order/external/create.action?txn_id=10000&from=11223&summ=1.11&currency=643 HTTP/1.1
 Host: bill.qiwi.com
 ~~~
 
