@@ -32,7 +32,7 @@ Invoicing operation on Pull REST API is idempotent, so on two consecutive reques
 Pull REST API requests are authorized through HTTP Basic-authorization with API ID and API password. Header is `Authorization` string and its value is `Basic Base64(API_ID:API_PASSWORD)`.
 
 
-~~~http
+~~~shell
 user@server:~$ curl "server_URL"
   --header "Authorization: Basic MjMyNDQxMjM6NDUzRmRnZDQ0Mw=="
 ~~~
@@ -68,11 +68,10 @@ Creates new invoice to the specified phone number (wallet ID in QIWI Wallet).
 
 <h3 class="request method">Request → PUT</h3>
 
-~~~http
+~~~shell
 user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
-  -X PUT
-  -d 'user=tel%3A%2B79161234567&amount=10.00&ccy=RUB&comment=test&lifetime=2016-09-25T15:00:00'
-  --header "Accept: text/json" --header "Authorization: Basic ***"
+  -X PUT  --header "Accept: text/json" --header "Authorization: Basic ***"
+  -d "user=tel%3A%2B79161234567&amount=10.00&ccy=RUB&comment=test&lifetime=2016-09-25T15:00:00"
 ~~~
 
 <ul class="nestedList url">
@@ -274,7 +273,7 @@ bill.comment|String|Comment to the invoice
 Get payment status of the invoice.
 
 
-~~~http
+~~~shell
 user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/sdf23452435"
   --header "Authorization: Basic ***" --header "Accept: text/json"
 ~~~
@@ -415,12 +414,11 @@ bill.comment|String|Comment to the invoice
 
 Сancels unpaid invoice provided that its lifetime has not expired yet.
 
-~~~http
+~~~shell
 user@server:~$ curl -X PATCH
-  --header "Authorization: Basic ***"
-  --header "Accept: text/json"
+  --header "Authorization: Basic ***"  --header "Accept: text/json"
   "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
-  -d 'status=rejected'
+  -d "status=rejected"
 ~~~
 
 <h3 class="request method">Request → PATCH</h3>
@@ -575,14 +573,13 @@ When the transmitted amount exceeds the initial invoice amount or the amount lef
 
 <h3 class="request method">Request → PUT</h3>
 
-~~~http
+~~~shell
 user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/REF1"
   -v -w "%{http_code}"
-  -X PUT
-  --header "Accept: text/json"
+  -X PUT  --header "Accept: text/json"
   --header "Authorization: Basic ***"
   --header "Content-type: application/x-www-form-urlencoded; charset=utf-8"
-  -d 'amount=5.0'
+  -d "amount=5.0"
 
 ~~~
 
@@ -650,7 +647,7 @@ Content-Type: text/json
 
 ~~~http
 
-HTTP/1.1 200
+HTTP/1.1 200 OK
 Content-Type: text/xml
 ~~~
 
@@ -709,7 +706,7 @@ Method returns current status of the refund.
 
 <h3 class="request method">Request → GET</h3>
 
-~~~http
+~~~shell
 user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/REF1"
   -v -w "%{http_code}"
   --header "Accept: text/json" --header "Authorization: Basic ***"
@@ -775,7 +772,7 @@ Content-Type: text/json
 
 ~~~http
 
-HTTP/1.1 200
+HTTP/1.1 200 OK
 Content-Type: text/xml
 ~~~
 

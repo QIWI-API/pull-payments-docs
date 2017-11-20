@@ -6,7 +6,7 @@ Notification is a POST-request (callback). The request's body contains all relev
 
 <h3 class="request method">Request → POST</h3>
 
-~~~http
+~~~shell
 Example
 
 user@server:~$ curl "https://service.ru/qiwi-notify.php"
@@ -175,50 +175,6 @@ Host: service.ru
 command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
 ~~~
 
-<aside class="notice">
-Merchant should enable "Sign" flag in <b>Protocols details - REST-protocol</b>section of <a href="https://ishop.qiwi.com">QIWI partners</a> web site.
-
-<ul class="nestedList notice_image">
-   <li><h3>Details</h3>
-        <ul>
-           <li><img src="/images/pull_rest_notification_cert_en.png" /></li>
-        </ul>
-   </li>
-</ul>
-</aside>
-
-The HTTP header `X-Api-Signature` with signature is added to the POST-request. Signature is calculated as HMAC algorithm with SHA1-hash function.
-
-* Parameters' separator is `|`.
-* Signed are all the parameters in the original [invoice request](#invoice).
-* Parameters are in alphabetical order and UTF-8 byte-encoded.
-* Secret key for signature is the [password](#basic_notify) for notification basic-authorization.
-
-Signature verification algorithm is as follows:
-
-1. Prepare a string of all parameters values from the notification POST-request sorted in alphabetical order and separated by `|`:
-
-    `{parameter1}|{parameter2}|…`
-
-    where `{parameter1}` is the value of the notification parameter. All values should be treated as strings.
-
-2. Transform obtained string and password for the notification [basic-authorization](#basic_notify) into bytes encoded in UTF-8.
-3. Apply HMAC-SHA1 function:
-
-    `hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`
-    Where:
-
-    * `Notification_password_bytes` – secret key (bytecoded notification password);
-    * `Invoice_parameters_bytes` – bytecoded POST-request body;
-    * `hash` – hash-function result.
-
-4. Transform HMAC-hash value into bytes with UTF-8 and Base64-encode it.
-5. Compare `X-Api-Signature` header's value with the result of step 4.
-
-## PHP Implementation Example {#php_apisign}
-
-The given PHP example implements notification authorization by signature verification. Open the _PHP_ tab on the right.
-
 ~~~php
 <?php
 
@@ -286,6 +242,49 @@ echo $xmlres;
 ?>
 ~~~
 
+<aside class="notice">
+Merchant should enable "Sign" flag in <b>Protocols details - REST-protocol</b>section of <a href="https://ishop.qiwi.com">QIWI partners</a> web site.
+
+<ul class="nestedList notice_image">
+   <li><h3>Details</h3>
+        <ul>
+           <li><img src="/images/pull_rest_notification_cert_en.png" /></li>
+        </ul>
+   </li>
+</ul>
+</aside>
+
+The HTTP header `X-Api-Signature` with signature is added to the POST-request. Signature is calculated as HMAC algorithm with SHA1-hash function.
+
+* Parameters' separator is `|`.
+* Signed are all the parameters in the original [invoice request](#invoice).
+* Parameters are in alphabetical order and UTF-8 byte-encoded.
+* Secret key for signature is the [password](#basic_notify) for notification basic-authorization.
+
+Signature verification algorithm is as follows:
+
+1. Prepare a string of all parameters values from the notification POST-request sorted in alphabetical order and separated by `|`:
+
+    `{parameter1}|{parameter2}|…`
+
+    where `{parameter1}` is the value of the notification parameter. All values should be treated as strings.
+
+2. Transform obtained string and password for the notification [basic-authorization](#basic_notify) into bytes encoded in UTF-8.
+3. Apply HMAC-SHA1 function:
+
+    `hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`
+    Where:
+
+    * `Notification_password_bytes` – secret key (bytecoded notification password);
+    * `Invoice_parameters_bytes` – bytecoded POST-request body;
+    * `hash` – hash-function result.
+
+4. Transform HMAC-hash value into bytes with UTF-8 and Base64-encode it.
+5. Compare `X-Api-Signature` header's value with the result of step 4.
+
+## PHP Implementation Example {#php_apisign}
+
+The given PHP example implements notification authorization by signature verification. Open the _PHP_ tab on the right.
 
 ## Notification Codes {#notify_codes}
 

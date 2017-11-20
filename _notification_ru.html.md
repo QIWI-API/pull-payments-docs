@@ -6,7 +6,7 @@
 
 <h3 class="request method">Запрос → POST</h3>
 
-~~~http
+~~~shell
 Пример
 
 user@server:~$ curl "https://service.ru/qiwi-notify.php"
@@ -72,7 +72,7 @@ command | `bill` - всегда по умолчанию | String |+
 
 <h3 class="request">Ответ ←</h3>
 
-~~~xml
+~~~http
 HTTP/1.1 200 OK
 Content-Type: text/xml
 
@@ -164,60 +164,6 @@ command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B790318
 
 ## Авторизация по подписи {#sign_notify}
 
-~~~http
-POST /qiwi-notify.php HTTP/1.1
-Accept: text/xml
-Content-type: application/x-www-form-urlencoded
-X-Api-Signature: J4WNfNZd***V5mv2w=
-Host: service.ru
-
-command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
-~~~
-
-<aside class="notice">
-Для использования этого способа активируйте флаг "Подпись" на партнерском сайте ishop.qiwi.com в разделе <b>Протоколы - REST-протокол</b>.
-
-<ul class="nestedList notice_image">
-   <li><h3>Подробнее</h3>
-        <ul>
-           <li><img src="/images/pull_rest_notification_cert.png" /></li>
-        </ul>
-   </li>
-</ul>
-</aside>
-
-Подпись уведомления отправляется в заголовке `X-Api-Signature`. Для формирования подписи используется механизм проверки целостности HMAC с хэш-функцией SHA1.
-
-* В качестве разделителей параметров используется символ `|`.
-* В подписи участвуют все параметры, которые присутствуют в исходном [запросе выставления счета](#invoice_rest).
-* Параметры для подписи переводятся в байт-представление с UTF-8 и располагаются в алфавитном порядке.
-* Ключ подписи равен [паролю](#basic_notify) для basic-авторизации уведомления.
-
-Алгоритм проверки подписи:
-
-1. Получить строку, содержащую значения всех параметров POST-запроса в алфавитном порядке перечисления параметров, разделенных символами `|`:
-
-   `{parameter1}|{parameter2}|…`
-
-   где `{parameter1}` – значение параметра уведомления. Все значения при проверке подписи должны трактоваться как строки.
-
-2. Cтроку и пароль для basic-авторизации уведомления преобразовать в байты с UTF-8.
-3. Вычислить HMAC-хэш c шифрованием SHA1:
-
-   `hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`
-   где:
-
-   * `Notification_password_bytes` – ключ функции (байт-представление basic-пароля для уведомлений);
-   * `Invoice_parameters_bytes` – байт-представление тела POST-запроса;
-   * `hash` – результат хэш-функции.
-
-4. HMAC-хэш преобразовать из строк в байты с использованием кодировки UTF-8 и base64-преобразовать.
-5. Сравнить значение заголовка `X-Api-Signature` с результатом 4.
-
-## Пример реализации {#notify_php}
-
-Пример на языке PHP реализует авторизацию уведомлений системы QIWI Wallet с проверкой цифровой подписи. Откройте вкладку _PHP_ справа.
-
 ~~~php
 <?php
 
@@ -284,6 +230,60 @@ XML;
 echo $xmlres;
 ?>
 ~~~
+
+~~~http
+POST /qiwi-notify.php HTTP/1.1
+Accept: text/xml
+Content-type: application/x-www-form-urlencoded
+X-Api-Signature: J4WNfNZd***V5mv2w=
+Host: service.ru
+
+command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
+~~~
+
+<aside class="notice">
+Для использования этого способа активируйте флаг "Подпись" на партнерском сайте ishop.qiwi.com в разделе <b>Протоколы - REST-протокол</b>.
+
+<ul class="nestedList notice_image">
+   <li><h3>Подробнее</h3>
+        <ul>
+           <li><img src="/images/pull_rest_notification_cert.png" /></li>
+        </ul>
+   </li>
+</ul>
+</aside>
+
+Подпись уведомления отправляется в заголовке `X-Api-Signature`. Для формирования подписи используется механизм проверки целостности HMAC с хэш-функцией SHA1.
+
+* В качестве разделителей параметров используется символ `|`.
+* В подписи участвуют все параметры, которые присутствуют в исходном [запросе выставления счета](#invoice_rest).
+* Параметры для подписи переводятся в байт-представление с UTF-8 и располагаются в алфавитном порядке.
+* Ключ подписи равен [паролю](#basic_notify) для basic-авторизации уведомления.
+
+Алгоритм проверки подписи:
+
+1. Получить строку, содержащую значения всех параметров POST-запроса в алфавитном порядке перечисления параметров, разделенных символами `|`:
+
+   `{parameter1}|{parameter2}|…`
+
+   где `{parameter1}` – значение параметра уведомления. Все значения при проверке подписи должны трактоваться как строки.
+
+2. Cтроку и пароль для basic-авторизации уведомления преобразовать в байты с UTF-8.
+3. Вычислить HMAC-хэш c шифрованием SHA1:
+
+   `hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`
+   где:
+
+   * `Notification_password_bytes` – ключ функции (байт-представление basic-пароля для уведомлений);
+   * `Invoice_parameters_bytes` – байт-представление тела POST-запроса;
+   * `hash` – результат хэш-функции.
+
+4. HMAC-хэш преобразовать из строк в байты с использованием кодировки UTF-8 и base64-преобразовать.
+5. Сравнить значение заголовка `X-Api-Signature` с результатом 4.
+
+## Пример реализации {#notify_php}
+
+Пример на языке PHP реализует авторизацию уведомлений системы QIWI Wallet с проверкой цифровой подписи. Откройте вкладку _PHP_ справа.
 
 ## Коды уведомлений  {#notify_codes}
 
