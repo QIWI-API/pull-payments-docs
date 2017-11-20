@@ -168,7 +168,6 @@ prv_name|Название провайдера.| String(100)|-
 <h3 class="request">Ответ ←</h3>
 
 ~~~http
-
 HTTP/1.1 200 OK
 Content-Type: text/json
 {
@@ -185,8 +184,8 @@ Content-Type: text/json
      }
   }
 }
-
-
+~~~
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
 {
@@ -267,7 +266,6 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
 <h3 class="request">Ответ ←</h3>
 
 ~~~http
-
 HTTP/1.1 200 OK
 Content-Type: text/json
 {
@@ -284,8 +282,8 @@ Content-Type: text/json
      }
   }
 }
-
-
+~~~
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
 {
@@ -386,7 +384,8 @@ Content-Type: text/json
       }
    }
 }
-
+~~~
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
 {
@@ -489,7 +488,6 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/
 <h3 class="request">Ответ ←</h3>
 
 ~~~http
-
 HTTP/1.1 200 OK
 Content-Type: text/json
 {
@@ -503,7 +501,8 @@ Content-Type: text/json
       }
    }
 }
-
+~~~
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
 {
@@ -576,7 +575,6 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/
 <h3 class="request">Ответ ←</h3>
 
 ~~~http
-
 HTTP/1.1 200 OK
 Content-Type: text/json
 {
@@ -590,7 +588,8 @@ Content-Type: text/json
       }
    }
 }
-
+~~~
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
 {

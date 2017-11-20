@@ -55,6 +55,8 @@ QIWI Pull Payments API opens a way to operations with QIWI Wallet invoices from 
 
 You can use the following integration methods with QIWI Wallet Pull Payments API:
 
-* [Online Invoicing Form](#webform_en) - Quick and easy solution for invoicing (does not require user redirect to QIWI Checkout). Has limited functions - only invoice issue. Calling web form is authorized by [API ID](#auth_param) and digital signature of the request or may be used without authorization (**not recommended**).
+* [Online Invoicing Form](#webform_en) - Quick and easy solution for invoicing (does not require user redirect to QIWI Checkout). Has limited functions - only invoice issue. You can call the web form in two ways:
+    * authorized by [API ID](#auth_param) and digital signature of the request
+    * without authorization (**not recommended**)
 
 * [Pull REST API](#pull_rest_api) - Fully functional RESTful API for all operations with invoices.

@@ -59,7 +59,7 @@ Host: mystore.com
 ~~~
 
 <aside class="notice">
-If the checkout page URL contains <i>successUrl</i> or <i>failUrl</i> parameter, the Visa QIWI Wallet site redirects the user back to the corresponding URL after completing the payment process. <b>Redirection occurs when the user pays by Visa QIWI Wallet account balance only</b>.
+If the checkout page URL contains <i>successUrl</i> or <i>failUrl</i> parameter, QIWI Wallet site redirects the user back to the corresponding URL after completing the payment process. <b>Redirection occurs when the user pays by QIWI Wallet account balance only</b>.
 </aside>
 
 <aside class="warning">
