@@ -1,12 +1,12 @@
 # Notifications {#notification_en}
 
-###### Last update: 2017-10-23 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_en.html.md)
+###### Last update: 2017-11-14 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_en.html.md)
 
 Notification is a POST-request (callback). The request's body contains all relevant data of the invoice serialized as HTTP-request parameters and encoded by UTF-8 plus parameter `command=bill`.
 
 <h3 class="request method">Request → POST</h3>
 
-~~~shell
+~~~http
 Example
 
 user@server:~$ curl "https://service.ru/qiwi-notify.php"
@@ -64,7 +64,7 @@ Parameter|Description|Type|Required
 ---------|--------|---|------
 status | [Current invoice status](#status)|String|Y
 amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
-user | The Visa QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String|Y
+user | The QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String|Y
 pay_date | Invoice's payment date (if invoice already paid) or empty|DateTime (`YYYY-MM-DDThh:mm:ss`)|Y
 prv_name |  Merchant’s site name specified on ishop.qiwi.com in "Settings"->"Contract/project details"->"Short name" section | String|Y
 ccy | Invoice currency identifier (Alpha-3 ISO 4217 code) | String(3)|Y
@@ -110,7 +110,7 @@ Any response with result code other than 0 ("Success") and/or HTTP status code o
 </aside>
 
 <aside class="notice">
-If the response with result code 0 ("Success") and HTTP status code 200 has not been received within 24 hours since the first request, Visa QIWI Wallet server will stop sending the requests. The merchant would receive an email  with new invoice status code and indication on the possible technical issues on the merchant’s server side.
+If the response with result code 0 ("Success") and HTTP status code 200 has not been received within 24 hours since the first request, QIWI Wallet server will stop sending the requests. The merchant would receive an email  with new invoice status code and indication on the possible technical issues on the merchant’s server side.
 </aside>
 
 <aside class="notice">
@@ -122,10 +122,10 @@ To receive notifications merchant must whitelist following IP subnets connected 
 
 ## Authorization on Merchant's Server {#notifications_auth}
 
-Merchant's server should use [basic-authorization](#basic_notify) or [authorization by signature](#sign_notify). Merchant may also use client SSL certificate verification (self-signed cerificates may be used as well). Visa QIWI Wallet server certificate should be verified in HTTPS requests.
+Merchant's server should use [basic-authorization](#basic_notify) or [authorization by signature](#sign_notify). Merchant may also use client SSL certificate verification (self-signed cerificates may be used as well). QIWI Wallet server certificate should be verified in HTTPS requests.
 
 <aside class="notice">
-If the client SSL-certificate is self-generated and is not issued by one of the standard certification centers, this certificate should be uploaded to the Visa QIWI Wallet server via <b>Certificate</b> field in <b>Settings - Protocols details - REST-protocol</b> section of <a href="https://ishop.qiwi.com">QIWI partners</a> web site).
+If the client SSL-certificate is self-generated and is not issued by one of the standard certification centers, this certificate should be uploaded to the QIWI Wallet server via <b>Certificate</b> field in <b>Settings - Protocols details - REST-protocol</b> section of <a href="https://ishop.qiwi.com">QIWI partners</a> web site).
 
 <ul class="nestedList notice_image">
    <li><h3>Details</h3>

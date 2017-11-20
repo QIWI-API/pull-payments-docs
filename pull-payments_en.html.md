@@ -5,7 +5,7 @@ search: true
 
 metatitle: QIWI Wallet Pull REST API 2.1
 
-metadescription: This API provides access to operations with invoices in Visa QIWI Wallet service. Invoice is the unique request for the payment. The user may pay the invoice with any accessible means till the invoice expired. API supports creating invoices, cancelling unpaid invoices, making refunds for paid invoices (when a user rejects merchant's good or service), checking operation's status.
+metadescription: This API provides access to operations with invoices in QIWI Wallet service. Invoice is the unique request for the payment. The user may pay the invoice with any accessible means till the invoice expired. API supports creating invoices, cancelling unpaid invoices, making refunds for paid invoices (when a user rejects merchant's good or service), checking operation's status.
 
 language_tabs:
   - http
@@ -27,9 +27,9 @@ includes:
 
 # Pull Payments {#intro}
 
-###### Last update: 2017-10-20 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pull-payments_en.html.md)
+###### Last update: 2017-11-15 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pull-payments_en.html.md)
 
-QIWI Pull Payments API opens a way to operations with Visa QIWI Wallet invoices from your service. The following operations are supported:
+QIWI Pull Payments API opens a way to operations with QIWI Wallet invoices from your service. The following operations are supported:
 
 * creating invoice
 * cancelling unpaid invoice
@@ -39,13 +39,13 @@ QIWI Pull Payments API opens a way to operations with Visa QIWI Wallet invoices 
 
 ## Payment methods {#payment_methods}
 
-* Customers may pay for Visa QIWI Wallet invoices
+* Customers may pay for QIWI Wallet invoices
   * on QIWI checkout (bill.qiwi.com)
   * on [qiwi.com](#https://qiwi.com) web-site
-    * from their Visa QIWI Wallet,
+    * from their QIWI Wallet,
     * from mobile phone account or any Visa/MasterCard
   * in QIWI mobile applications (Android/iOS/Windows Phone)
-    * from their Visa QIWI Wallet,
+    * from their QIWI Wallet,
     * from mobile phone account or any Visa/MasterCard
   * by cash in QIWI Self-service kiosks.
 
