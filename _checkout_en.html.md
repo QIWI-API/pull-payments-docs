@@ -41,7 +41,7 @@ failUrl |URL-encoded string | The URL to which the payer will be redirected when
 target |`iframe` string| The parameter turns on opening hyperlinks specified in `successUrl` / `failUrl` parameters in "iframe" page|N
 pay_source |string| Default payment method to show first on the page for the user. Allowed values:<br>`qw` – QIWI Wallet account;<br> `mobile` – client’s cell phone account;<br> `card` – a credit/debit card;<br> `wm` – linked WebMoney wallet;<br> `ssk` – payment by cash in a QIWI Terminal.<br> When specified method is inaccessible for the user, the page shows a notice about it and the client can choose another method.|N
 
-## Redirection to Merchant Site {#status-links}
+## Redirection to Merchant Site {#back_url}
 
 ~~~text
 Redirect when transaction is successfully created
