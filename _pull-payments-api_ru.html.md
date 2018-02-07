@@ -1,6 +1,6 @@
 # Pull REST API {#pull-payments-api_ru}
 
-###### Последнее обновление: 2017-11-14 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_ru.html.md)
+###### Последнее обновление: 2018-02-07 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_ru.html.md)
 
 ## Последовательность операций {#steps}
 
@@ -29,6 +29,13 @@
 
 Все запросы мерчанта к Pull REST API авторизуются посредством HTTP basic-авторизации. Для авторизации используются API ID и API password. Заголовок представляет собой параметр `Authorization`, значение которого представлено как: `Basic Base64(API_ID:API_PASSWORD)`
 
+~~~javascript
+const prv_id = 21379721;
+const api_id = 62573819;
+const api_password = '**********';
+
+const qiwiRestApi = new QiwiPullAPI(prv_id, api_id, api_password);
+~~~
 
 ~~~shell
 user@server:~$ curl "адрес сервера"
@@ -115,10 +122,28 @@ echo '<br><br><b><a href="'.$url.'">Ссылка переадресации дл
 ?>
 ~~~
 
+~~~javascript
+const bill_id = '99111-ABCD-1-2-1';
+
+const fields = {
+    amount: 1000.00,
+    ccy: 'RUB',
+    comment: 'Все очень хорошо',
+    lifetime: '2015-01-30T15:35:00',
+    user: 'tel:+79191234567',
+    pay_source: 'qw',
+    prv_name: 'Хороший магазин'
+};
+
+qiwiRestApi.createBill( bill_id, fields ).then( data => {
+    //do with data
+});
+~~~
+
 <h3 class="request method">Запрос → PUT</h3>
 
 ~~~shell
-  user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
+  user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/99111-ABCD-1-2-1"
     -X PUT --header "Accept: text/json"
     --header "Authorization: Basic ***"
     -d "user=tel%3A%2B79031234567&amount=10.00&ccy=RUB&comment=test&lifetime=2016-09-25T15:00:00"
@@ -174,13 +199,13 @@ Content-Type: text/json
   "response": {
      "result_code": 0,
      "bill": {
-        "bill_id": "BILL-1",
-        "amount": "10.00",
+        "bill_id": "99111-ABCD-1-2-1",
+        "amount": "1000.00",
         "ccy": "RUB",
         "status": "waiting",
         "error": 0,
-        "user": "tel:+79031234567",
-        "comment": "test"
+        "user": "tel:+79191234567",
+        "comment": "Хороший магазин"
      }
   }
 }
@@ -235,10 +260,18 @@ bill.comment|String|Комментарий к счету
 
 Метод для проверки текущего статуса счета.
 
+~~~javascript
+const bill_id = '99111-ABCD-1-2-1';
+
+qiwiRestApi.getStatus(bill_id).then( data => {
+    //do with data
+});
+~~~
+
 <h3 class="request method">Запрос → GET</h3>
 
 ~~~shell
-user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
+user@server:~$ curl "https://api.qiwi.com/api/v2/prv/21379721/bills/99111-ABCD-1-2-1"
   --header "Authorization: Basic ***"
   --header "Accept: text/json"
 ~~~
@@ -272,8 +305,8 @@ Content-Type: text/json
   "response": {
      "result_code": 0,
      "bill": {
-        "bill_id": "BILL-1",
-        "amount": "10.00",
+        "bill_id": "99111-ABCD-1-2-1",
+        "amount": "1000.00",
         "ccy": "RUB",
         "status": "waiting",
         "error": 0,
@@ -329,10 +362,18 @@ bill.comment|String|Комментарий к счету
 
 Метод для отмены неоплаченного клиентом счета до наступления предельной даты оплаты счета (см. [параметр](#invoice_rest) `lifetime`).
 
+~~~javascript
+const bill_id = '99111-ABCD-1-2-1';
+
+qiwiRestApi.cancel(bill_id).then( data => {
+    //do with data
+});
+~~~
+
 <h3 class="request method">Запрос → PATCH</h3>
 
 ~~~shell
-user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1"
+user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/99111-ABCD-1-2-1"
   -X PATCH
   --header "Authorization: Basic ***"
   --header "Accept: text/json"
@@ -374,8 +415,8 @@ Content-Type: text/json
    "response": {
       "result_code": 0,
       "bill": {
-         "bill_id": "BILL-1",
-         "amount": "10.00",
+         "bill_id": "99111-ABCD-1-2-1",
+         "amount": "1000.00",
          "ccy": "RUB",
          "status": "rejected",
          "error": 0,
@@ -447,10 +488,20 @@ bill.comment|String|Комментарий к счету
 
 * Данный сценарий можно повторять несколько раз до тех пор, пока счет не будет полностью отменен (возвращена вся сумма).
 
+~~~javascript
+const bill_id = '893794793973';
+const refund_id = '899343443';
+const amount = 5.0;
+
+qiwiRestApi.refund(bill_id, refund_id, amount).then( data => {
+    //do with data
+});
+~~~
+
 <h3 class="request method">Запрос → PUT</h3>
 
 ~~~shell
-user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/REF1"
+user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/893794793973/refund/899343443"
   -v -w "%{http_code}"
   -X PUT
   --header "Accept: text/json"
@@ -494,7 +545,7 @@ Content-Type: text/json
    "response": {
       "result_code": 0,
       "refund": {
-         "refund_id": "br1",
+         "refund_id": "899343443",
          "amount": "5.00",
          "status": "success",
          "error": 0
@@ -542,10 +593,19 @@ refund.error|Integer|[Код ошибки](#errors) при проведении 
 
 Метод для проверки текущего статуса операции возврата средств по оплаченному счету.
 
+~~~javascript
+const bill_id = '893794793973';
+const refund_id = '899343443';
+
+qiwiApi.getRefundStatus(bill_id, refund_id).then( data => {
+    //do with data
+});
+~~~
+
 <h3 class="request method">Запрос → GET</h3>
 
 ~~~shell
-user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/BILL-1/refund/REF1"
+user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/893794793973/refund/899343443"
   -v -w "%{http_code}"
   --header "Accept: text/json"
   --header "Authorization: Basic ***"
@@ -581,7 +641,7 @@ Content-Type: text/json
    "response": {
       "result_code": 0,
       "refund": {
-         "refund_id": "REF1",
+         "refund_id": "899343443",
          "amount": "5.00",
          "status": "success",
          "error": 0

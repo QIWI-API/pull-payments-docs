@@ -8,8 +8,9 @@ metatitle: QIWI Wallet Pull REST API 2.1
 metadescription: QIWI Wallet Pull API открывает доступ к операциям со счетами в системе QIWI Wallet из вашего приложения. Поддерживаются операции выставления и отмены счетов, возврата средств по счетам, а также проверки статуса выполнения операций.
 
 language_tabs:
-  - http
+  - shell
   - php
+  - javascript: Node.js
 
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
@@ -61,5 +62,3 @@ QIWI Wallet Pull API открывает доступ к операциям со 
     * без авторизации (**не рекомендуется**).
 
 * [Pull REST API](#pull-payments-api_ru) - Полнофункциональное API для всех операций со счетами.
-
-

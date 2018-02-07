@@ -24,8 +24,6 @@
     <li><h3>URL <span>https://bill.qiwi.com/order/external/create.action</span></h3></li>
 </ul>
 
-
-
 ~~~http
 GET /order/external/create.action?txn_id=10000&from=11223&summ=1.11&successUrl=http%3A%2F%2Ftest.ru%3Fcurrency=643 HTTP/1.1
 Host: bill.qiwi.com

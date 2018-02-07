@@ -1,15 +1,25 @@
 # Форма оплаты {#checkout_ru}
 
-###### Последнее обновление: 2017-11-14 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_ru.html.md)
+###### Последнее обновление: 2018-02-07 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_ru.html.md)
 
 Провайдер может предложить пользователю немедленно оплатить счет с помощью переадресации на платежную форму.
 
-~~~text
-Вызов формы оплаты
-~~~
-~~~http
-GET /order/external/main.action?shop=2042&transaction=1234567&successUrl=http%3A%2F%2Fmystore.com%2Fsuccess%3Fa%3D1%26b%3D2&failUrl=http%3A%2F%2Fmystore.com%2Ffail%3Fa%3D1%26b%3D2&pay_source=qw HTTP/1.1
+~~~shell
+GET /order/external/main.action?shop=2042&transaction=893794793973&successUrl=http%3A%2F%2Fmystore.com%2Fsuccess%3Fa%3D1%26b%3D2&failUrl=http%3A%2F%2Fmystore.com%2Ffail%3Fa%3D1%26b%3D2&pay_source=qw HTTP/1.1
 Host: bill.qiwi.com
+~~~
+
+~~~javascript
+const bill_id = '893794793973';
+
+const options = {
+    transaction: billId,
+    successUrl: 'http://mystore.com/success',
+    failUrl: 'http://mystore.com/fail',
+    pay_source: 'qw'
+};
+
+const link = qiwiRestApi.createPaymentForm(options);
 ~~~
 
 <h3 class="request method">Запрос → REDIRECT</h3>
@@ -41,16 +51,15 @@ pay_source|Строка| Способ оплаты по умолчанию, ко
 
 ## Возврат на сайт провайдера {#back_url}
 
-~~~text
-Возврат клиента после успешного создания транзакции
-~~~
+> Возврат клиента после успешного создания транзакции
+
 ~~~http
 GET /success?a=1&b=2&order=1234567 HTTP/1.1
 Host: mystore.com
 ~~~
-~~~text
-Возврат клиента в случае неуспеха при создании транзакции
-~~~
+
+> Возврат клиента в случае неуспеха при создании транзакции
+
 ~~~http
 GET /fail?a=1&b=2&order=1234567 HTTP/1.1
 Host: mystore.com
