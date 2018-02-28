@@ -14,7 +14,7 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
   -X POST --header "Accept: text/xml"
   --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
   --Authorization: "Basic MjA0Mjp0ZXN0Cg=="
-  -d "bill_id=BILL-1%26status=paid%26pay_date=2016%3A11%3A16T11%3A00%3A15%26amount=1.00%26user=tel%3A%2B79031811737%26prv_name=TEST%26ccy=RUB%26comment=test%26command=bill"
+  -d "bill_id=BILL-1%26status=paid%26amount=1.00%26user=tel%3A%2B79031811737%26prv_name=TEST%26ccy=RUB%26comment=test%26command=bill"
 ~~~
 
 <ul class="nestedList url">
@@ -65,11 +65,12 @@ Parameter|Description|Type|Required
 status | [Current invoice status](#status)|String|Y
 amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
 user | The QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String|Y
-pay_date | Invoice's payment date (if invoice already paid) or empty|DateTime (`YYYY-MM-DDThh:mm:ss`)|Y
 prv_name |  Merchant’s site name specified on ishop.qiwi.com in "Settings"->"Contract/project details"->"Short name" section | String|Y
 ccy | Invoice currency identifier (Alpha-3 ISO 4217 code) | String(3)|Y
 comment | Comment to the invoice | String(255)|Y
 command | Always `bill` by default | String |Y
+
+<aside class="notice">As new parameters of the invoice might be introduced on QIWI Wallet side, a list of invoice parameters in HTTP-request should not be fixed on the merchant's side and should be taken from the request itself.</aside>
 
 <h3 class="request">Response ←</h3>
 

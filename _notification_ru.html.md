@@ -14,7 +14,7 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
   -X POST --header "Accept: text/xml"
   --header "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
   --Authorization: "Basic MjA0Mjp0ZXN0Cg=="
-  -d "bill_id=BILL-1%26status=paid%26pay_date=2016%3A11%3A16T11%3A00%3A15%26amount=1.00%26user=tel%3A%2B79031811737%26prv_name=TEST%26ccy=RUB%26comment=test%26command=bill"
+  -d "bill_id=BILL-1%26status=paid%26amount=1.00%26user=tel%3A%2B79031811737%26prv_name=TEST%26ccy=RUB%26comment=test%26command=bill"
 ~~~
 
 <ul class="nestedList url">
@@ -64,11 +64,12 @@ Aдрес сервера для уведомлений указывается в
 status | Текущий [статус счета](#status)|String|+
 amount | Сумма, на которую выставлялся счет, округленная до двух десятичных знаков | Number(6.2)|+
 user | Номер QIWI Кошелька, на который был выставлен счет | String|+
-pay_date | Дата оплаты счета (заполняется, если счет оплачен)|DateTime (`YYYY-MM-DDThh:mm:ss`)|+
 prv_name |  Наименование проекта, указанное на сайте ishop.qiwi.com в разделе:"Настройки"->"Данные проекта"->"Короткое наименование" | String|+
 ccy | Идентификатор валюты (Alpha-3 ISO 4217 код) | String(3)|+
 comment | Комментарий к счету | String(255)|+
 command | `bill` - всегда по умолчанию | String |+
+
+<aside class="notice">Так как для счета могут быть добавлены новые параметры на стороне QIWI Кошелька, то список параметров при обработке POST-запроса на стороне провайдера не должен фиксироваться.</aside>
 
 <h3 class="request">Ответ ←</h3>
 
