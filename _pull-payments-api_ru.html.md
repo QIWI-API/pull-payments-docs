@@ -55,7 +55,20 @@ user@server:~$ curl "адрес сервера"
  ID проекта | Числовой идентификатор сервиса провайдера | Integer | +
 
 <aside class="notice">
-Получить служебные данные можно на партнерском сайте <a href='http://ishop.qiwi.com'>ishop.qiwi.com</a> в разделе "Протоколы - REST-протокол - Аутентификационные данные".
+Получить служебные данные можно на сайте <a href='http://kassa.qiwi.com'>QIWI Кассы</a> в разделе "Настройки протокола - Аутентификационные данные".
+
+<ul class="nestedList notice_image">
+    <li><h3>Подробнее</h3>
+        <ul>
+             <li><img src="/images/pull_rest_auth_kassa.png" /></li>
+        </ul>
+    </li>
+</ul>
+
+</aside>
+
+<aside class="notice">
+Если у вас нет учетной записи в QIWI Кассе, то получить служебные данные можно на партнерском сайте <a href='http://ishop.qiwi.com'>ishop.qiwi.com</a> в разделе "Протоколы - REST-протокол - Аутентификационные данные".
 
 <ul class="nestedList notice_image">
     <li><h3>Подробнее</h3>

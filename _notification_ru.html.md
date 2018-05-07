@@ -1,6 +1,6 @@
 # Уведомления об оплате счетов {#notification_ru}
 
-###### Последнее обновление: 2017-11-14 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_ru.html.md)
+###### Последнее обновление: 2018-05-03 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_ru.html.md)
 
 Уведомление представляет собой POST-запрос. Тело запроса содержит сериализованные данные счета в теле запроса (кодировка UTF-8), и параметр `command=bill`.
 
@@ -23,7 +23,25 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
 </ul>
 
 <aside class="notice">
-Для получения уведомлений активируйте их на партнерском сайте ishop.qiwi.com (раздел "Настройки Pull (REST) протокола", пункт "Включить уведомления").
+Чтобы начать получать уведомления, на сайте <a href="https://kassa.qiwi.com">QIWI Касса</a> достаточно указать адрес сервера для обработки уведомлений (раздел "Услуги", выбрать мерчанта, пункт "Настройки протокола", далее "Серверные уведомления").
+
+<ul class="nestedList notice_image">
+    <li><h3>Подробнее</h3>
+        <ul>
+             <li><img src="/images/pull_rest_auth_kassa.png"/></li>
+        </ul>
+        <ul>
+             <li><img src="/images/pull_rest_notifications_kassa.png"/></li>
+        </ul>
+        <ul>
+            <li>Нажмите "Создать пароль и сохранить" для получения <a href="#basic_notify">пароля</a> авторизации уведомлений</li>
+        </ul>
+    </li>
+</ul>
+</aside>
+
+<aside class="notice">
+Если вы пользуетесь партнерским сайтом ishop.qiwi.com, активируйте уведомления в разделе "Настройки Pull (REST) протокола", пункт "Включить уведомления".
 <ul class="nestedList notice_image">
     <li><h3>Подробнее</h3>
         <ul>
@@ -125,10 +143,19 @@ Content-Type: text/xml
 Для авторизации можно использовать [basic-авторизацию](#basic_notify) или [авторизацию подписи](#sign_notify). При запросах уведомлений на сервер провайдера также можно использовать SSL (в том числе самоподписанный сертификат). В HTTPS-запросах необходимо проверять серверный сертификат QIWI Wallet.
 
 <aside class="notice">
-Если сертификат для SSL-шифрования сгенерирован самостоятельно и не является доверенным со стороны стандартных центров сертификации, его необходимо загрузить в систему QIWI Wallet через инструмент <b>Сертификат</b> раздела <b>Протоколы - REST-протокол</b> сайта ishop.qiwi.com.
+Если сертификат для SSL-шифрования сгенерирован самостоятельно и не является доверенным со стороны стандартных центров сертификации, его необходимо загрузить в систему QIWI Wallet.
+
 
 <ul class="nestedList notice_image">
-   <li><h3>Подробнее</h3>
+   <li><h3>Сайт <a href="https://kassa.qiwi.com">QIWI Касса</a>, выбрать <b>Прикрепить цифровой сертификат</b> и <b>Сохранить настройки</h3>
+        <ul>
+           <li><img src="/images/pull_rest_notifications_kassa.png" /></li>
+        </ul>
+        <ul>
+           <li><img src="/images/pull_rest_notifications_cert_kassa.png" /></li>
+        </ul>
+   </li>
+   <li><h3>Сайт ishop.qiwi.com, выбрать файл <b>Сертификат</b> в разделе <b>Протоколы - REST-протокол</b></h3>
         <ul>
            <li><img src="/images/pull_rest_notification_cert.png" /></li>
         </ul>
@@ -152,7 +179,22 @@ Host: service.ru
 command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=Retail_Store&ccy=RUB&comment=test
 ~~~
 
-Логин равен [ID магазина](#auth_param). Для получения пароля нажмите кнопку "Сменить пароль оповещения" в [Личном кабинете мерчанта](http://ishop.qiwi.com)в разделе "Настройки"->"REST-Протокол".
+Логин равен [ID магазина](#auth_param).
+
+Для первичного получения или смены пароля на сайте [QIWI Касса](https://kassa.qiwi.com), нажмите кнопку "Создать пароль и сохранить" или "Сменить пароль оповещения".
+
+<ul class="nestedList">
+    <li><h3>Подробнее</h3>
+        <ul>
+             <li><img src="/images/pull_rest_notifications_pass_kassa.png" /></li>
+        </ul>
+        <ul>
+             <li><img src="/images/pull_rest_notifications_cert_kassa.png" /></li>
+        </ul>
+    </li>
+</ul>
+
+Для первичного получения или смены пароля на сайте ishop.qiwi.com, нажмите кнопку "Сменить пароль оповещения" в разделе "Настройки"->"REST-Протокол".
 
 <ul class="nestedList">
     <li><h3>Подробнее</h3>
@@ -161,7 +203,6 @@ command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B790318
         </ul>
     </li>
 </ul>
-
 
 ## Авторизация по подписи {#sign_notify}
 
