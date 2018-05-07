@@ -23,7 +23,7 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
 </ul>
 
 <aside class="notice">
-Чтобы начать получать уведомления, на сайте <a href="https://kassa.qiwi.com">QIWI Касса</a> достаточно указать адрес сервера для обработки уведомлений (раздел "Услуги", выбрать мерчанта, пункт "Настройки протокола", далее "Серверные уведомления").
+Чтобы начать получать уведомления, на сайте <a href="https://kassa.qiwi.com">QIWI Касса</a> достаточно указать адрес сервера для обработки уведомлений (раздел "Услуги", выбрать мерчанта, пункт "Настройки протокола"->"Серверные уведомления").
 
 <ul class="nestedList notice_image">
     <li><h3>Подробнее</h3>
@@ -34,14 +34,14 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
              <li><img src="/images/pull_rest_notifications_kassa.png"/></li>
         </ul>
         <ul>
-            <li>Нажмите "Создать пароль и сохранить" для получения <a href="#basic_notify">пароля</a> авторизации уведомлений</li>
+            <li>Нажмите "Создать пароль и сохранить" для первичного получения <a href="#basic_notify">пароля</a> авторизации уведомлений</li>
         </ul>
     </li>
 </ul>
 </aside>
 
 <aside class="notice">
-Если вы пользуетесь партнерским сайтом ishop.qiwi.com, активируйте уведомления в разделе "Настройки Pull (REST) протокола", пункт "Включить уведомления".
+Если вы пользуетесь партнерским сайтом ishop.qiwi.com, активируйте пункт "Включить уведомления" в разделе "Настройки"->"REST-протокол".
 <ul class="nestedList notice_image">
     <li><h3>Подробнее</h3>
         <ul>
@@ -64,8 +64,8 @@ Aдрес сервера для уведомлений указывается в
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
         <ul>
-             <li>Authorization: Basic *** - авторизация по <a href="#basic_notify">логину/паролю</a></li>
-             <li>X-Api-Signature: *** - авторизация по <a href="#sign_notify">цифровой подписи</a></li>
+             <li>Authorization: Basic *** - для авторизации по <a href="#basic_notify">логину/паролю</a></li>
+             <li>X-Api-Signature: *** - для авторизации по <a href="#sign_notify">цифровой подписи</a></li>
              <li>Accept: text/xml</li>
              <li>Content-type: application/x-www-form-urlencoded</li>
         </ul>
@@ -145,9 +145,8 @@ Content-Type: text/xml
 <aside class="notice">
 Если сертификат для SSL-шифрования сгенерирован самостоятельно и не является доверенным со стороны стандартных центров сертификации, его необходимо загрузить в систему QIWI Wallet.
 
-
 <ul class="nestedList notice_image">
-   <li><h3>Сайт <a href="https://kassa.qiwi.com">QIWI Касса</a>, выбрать <b>Прикрепить цифровой сертификат</b> и <b>Сохранить настройки</h3>
+   <li><h3>Сайт <a href="https://kassa.qiwi.com">QIWI Касса</a>, выбрать "Прикрепить цифровой сертификат" и сохранить настройки</h3>
         <ul>
            <li><img src="/images/pull_rest_notifications_kassa.png" /></li>
         </ul>
@@ -155,7 +154,10 @@ Content-Type: text/xml
            <li><img src="/images/pull_rest_notifications_cert_kassa.png" /></li>
         </ul>
    </li>
-   <li><h3>Сайт ishop.qiwi.com, выбрать файл <b>Сертификат</b> в разделе <b>Протоколы - REST-протокол</b></h3>
+</ul>
+
+<ul class="nestedList notice_image">
+   <li><h3>Сайт ishop.qiwi.com, выбрать файл "Сертификат" в разделе "Протоколы - REST-протокол"</h3>
         <ul>
            <li><img src="/images/pull_rest_notification_cert.png" /></li>
         </ul>
@@ -167,7 +169,7 @@ Content-Type: text/xml
 <li>DER (файл с расширением.cer, .crt, .der) – обычно в бинарном формате DER, однако PEM сертификаты также допускаются с таким расширением.</li></ul>
 </aside>
 
-## Basic-авторизация {#basic_notify}
+### Basic-авторизация {#basic_notify}
 
 ~~~http
 POST /qiwi-notify.php HTTP/1.1
@@ -181,7 +183,7 @@ command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B790318
 
 Логин равен [ID магазина](#auth_param).
 
-Для первичного получения или смены пароля на сайте [QIWI Касса](https://kassa.qiwi.com), нажмите кнопку "Создать пароль и сохранить" или "Сменить пароль оповещения".
+Для первичного получения или смены пароля на сайте [QIWI Касса](https://kassa.qiwi.com), нажмите кнопку "Создать пароль и сохранить" или "Сменить пароль оповещения", соответственно.
 
 <ul class="nestedList">
     <li><h3>Подробнее</h3>
@@ -204,7 +206,7 @@ command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B790318
     </li>
 </ul>
 
-## Авторизация по подписи {#sign_notify}
+### Авторизация по подписи {#sign_notify}
 
 ~~~php
 <?php
@@ -283,8 +285,18 @@ Host: service.ru
 command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
 ~~~
 
+Для использования этого способа авторизации уведомлений, на сайте <a href="https://kassa.qiwi.com">QIWI Касса</a> достаточно активировать флаг "Использовать HMAC подпись вместо basic-авторизации".
+
+<ul class="nestedList notice_image">
+   <li><h3>Подробнее</h3>
+        <ul>
+           <li><img src="/images/pull_rest_notifications_kassa_sign.png" /></li>
+        </ul>
+   </li>
+</ul>
+
 <aside class="notice">
-Для использования этого способа активируйте флаг "Подпись" на партнерском сайте ishop.qiwi.com в разделе <b>Протоколы - REST-протокол</b>.
+Если вы пользуетесь сайтом ishop.qiwi.com, активируйте флаг "Подпись" в разделе <b>"Настройки"->"REST-Протокол"</b>.
 
 <ul class="nestedList notice_image">
    <li><h3>Подробнее</h3>
