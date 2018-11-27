@@ -42,7 +42,7 @@ QIWI Wallet Pull API открывает доступ к операциям со 
 ## Способы оплаты {#payment_methods}
 
 * Пользователи могут оплачивать счета QIWI Wallet
-  * в интерфейсах платежной формы QIWI (bill.qiwi.com)
+  * в интерфейсах платежной формы QIWI (oplata.qiwi.com)
   * на сайте [qiwi.com](#https://qiwi.com)
     * с баланса своего QIWI Кошелька
     * с баланса мобильного телефона или с любой карты Visa/MasterCard.

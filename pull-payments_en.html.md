@@ -40,7 +40,7 @@ QIWI Pull Payments API opens a way to operations with QIWI Wallet invoices from 
 ## Payment methods {#payment_methods}
 
 * Customers may pay for QIWI Wallet invoices
-  * on QIWI checkout (bill.qiwi.com)
+  * on QIWI checkout (oplata.qiwi.com)
   * on [qiwi.com](#https://qiwi.com) web-site
     * from their QIWI Wallet,
     * from mobile phone account or any Visa/MasterCard

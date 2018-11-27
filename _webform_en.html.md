@@ -21,12 +21,12 @@ Web form calling is performed without merchant's authorization. Client can input
 <h3 class="request method">Request → REDIRECT</h3>
 
 <ul class="nestedList url">
-    <li><h3>URL <span>https://bill.qiwi.com/order/external/create.action</span></h3></li>
+    <li><h3>URL <span>https://oplata.qiwi.com/order/external/create.action</span></h3></li>
 </ul>
 
 ~~~http
 GET /order/external/create.action?txn_id=10000&from=11223&summ=1.11&currency=643 HTTP/1.1
-Host: bill.qiwi.com
+Host: oplata.qiwi.com
 ~~~
 
 <ul class="nestedList params">

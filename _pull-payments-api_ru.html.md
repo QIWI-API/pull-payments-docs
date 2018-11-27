@@ -127,7 +127,7 @@ echo $results;
 echo curl_error($ch);
 curl_close ($ch);
 //Необязательный редирект пользователя
-$url = 'https://bill.qiwi.com/order/external/main.action?shop='.$SHOP_ID.'&
+$url = 'https://oplata.qiwi.com/order/external/main.action?shop='.$SHOP_ID.'&
 transaction='.$BILL_ID.'&successUrl=http%3A%2F%2Fieast.ru%2Findex.php%3Froute%3D
 payment%2Fqiwi%2Fsuccess&failUrl=http%3A%2F%2Fieast.ru%2Findex.php%3Froute%3D
 payment%2Fqiwi%2Ffail&pay_source=card';
