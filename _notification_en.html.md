@@ -62,6 +62,7 @@ Specify notifications server URL in the same section.
 
 Parameter|Description|Type|Required
 ---------|--------|---|------
+bill_id |Merchant invoice number | String|Y
 status | [Current invoice status](#status)|String|Y
 amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
 user | The QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String|Y
