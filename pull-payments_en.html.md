@@ -49,7 +49,7 @@ QIWI Pull Payments API opens a way to operations with QIWI Wallet invoices from 
     * from mobile phone account or any Visa/MasterCard
   * by cash in QIWI Self-service kiosks.
 
-**To use API, complete [registration and approvement of the agreement](https://ishop.qiwi.com).**
+**To use API, complete [registration and approvement of the agreement](https://kassa.qiwi.com).**
 
 ## Integration methods {#implement}
 
