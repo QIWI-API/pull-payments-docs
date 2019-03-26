@@ -41,7 +41,7 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
 </aside>
 
 <aside class="notice">
-Если вы пользуетесь партнерским сайтом ishop.qiwi.com, активируйте пункт "Включить уведомления" в разделе "Настройки"->"REST-протокол".
+Если вы пользуетесь партнерским сайтом kassa.qiwi.com, активируйте пункт "Включить уведомления" в разделе "Настройки".
 <ul class="nestedList notice_image">
     <li><h3>Подробнее</h3>
         <ul>
@@ -83,7 +83,7 @@ bill_id | Уникальный идентификатор счета в сист
 status | Текущий [статус счета](#status)|String|+
 amount | Сумма, на которую выставлялся счет, округленная до двух десятичных знаков | Number(6.2)|+
 user | Номер QIWI Кошелька, на который был выставлен счет | String|+
-prv_name |  Наименование проекта, указанное на сайте ishop.qiwi.com в разделе:"Настройки"->"Данные проекта"->"Короткое наименование" | String|+
+prv_name |  Наименование проекта, указанное на сайте kassa.qiwi.comв разделе:"Настройки" | String|+
 ccy | Идентификатор валюты (Alpha-3 ISO 4217 код) | String(3)|+
 comment | Комментарий к счету | String(255)|+
 command | `bill` - всегда по умолчанию | String |+
@@ -158,7 +158,7 @@ Content-Type: text/xml
 </ul>
 
 <ul class="nestedList notice_image">
-   <li><h3>Сайт ishop.qiwi.com, выбрать файл "Сертификат" в разделе "Протоколы - REST-протокол"</h3>
+   <li><h3>Сайт kassa.qiwi.com, выбрать файл "Сертификат" в разделе "Настройки"</h3>
         <ul>
            <li><img src="/images/pull_rest_notification_cert.png" /></li>
         </ul>
@@ -197,7 +197,7 @@ command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B790318
     </li>
 </ul>
 
-Для первичного получения или смены пароля на сайте ishop.qiwi.com, нажмите кнопку "Сменить пароль оповещения" в разделе "Настройки"->"REST-Протокол".
+Для первичного получения или смены пароля на сайте kassa.qiwi.com, нажмите кнопку "Сменить пароль оповещения" в разделе "Настройки"->"REST-Протокол".
 
 <ul class="nestedList">
     <li><h3>Подробнее</h3>
@@ -251,7 +251,7 @@ function getSign(){
 
 // Сортировка параметров
 $Request = getReqParams();
-// Пароль ishop для уведомлений магазина
+// Пароль  для уведомлений магазина
 $NOTIFY_PWD = "***";
 // Вычисляем подпись
 $reqres = checkSign($NOTIFY_PWD, $Request);
@@ -297,7 +297,7 @@ command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B7
 </ul>
 
 <aside class="notice">
-Если вы пользуетесь сайтом ishop.qiwi.com, активируйте флаг "Подпись" в разделе <b>"Настройки"->"REST-Протокол"</b>.
+Если вы пользуетесь сайтом kassa.qiwi.com, активируйте флаг "Подпись" в разделе <b>"Настройки"</b>.
 
 <ul class="nestedList notice_image">
    <li><h3>Подробнее</h3>

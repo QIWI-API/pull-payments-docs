@@ -23,7 +23,7 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
 </ul>
 
 <aside class="notice">
-To receive notifications, use **Turn on notifications** flag in **Settings - Protocols details - REST-protocol** section of <a href="ishop.qiwi.com">QIWI partners web site</a>.
+To receive notifications, use **Turn on notifications** flag in **Settings** section of <a href="kassa.qiwi.com">QIWI partners web site</a>.
 <ul class="nestedList notice_image">
     <li><h3>Details</h3>
         <ul>
@@ -66,7 +66,7 @@ bill_id |Merchant invoice number | String|Y
 status | [Current invoice status](#status)|String|Y
 amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
 user | The QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String|Y
-prv_name |  Merchant’s site name specified on ishop.qiwi.com in "Settings"->"Contract/project details"->"Short name" section | String|Y
+prv_name |  Merchant’s site name specified on kassa.qiwi.comm in "Settings" section | String|Y
 ccy | Invoice currency identifier (Alpha-3 ISO 4217 code) | String(3)|Y
 comment | Comment to the invoice | String(255)|Y
 command | Always `bill` by default | String |Y
@@ -127,7 +127,7 @@ To receive notifications merchant must whitelist following IP subnets connected 
 Merchant's server should use [basic-authorization](#basic_notify) or [authorization by signature](#sign_notify). Merchant may also use client SSL certificate verification (self-signed cerificates may be used as well). QIWI Wallet server certificate should be verified in HTTPS requests.
 
 <aside class="notice">
-If the client SSL-certificate is self-generated and is not issued by one of the standard certification centers, this certificate should be uploaded to the QIWI Wallet server via <b>Certificate</b> field in <b>Settings - Protocols details - REST-protocol</b> section of <a href="https://ishop.qiwi.com">QIWI partners</a> web site).
+If the client SSL-certificate is self-generated and is not issued by one of the standard certification centers, this certificate should be uploaded to the QIWI Wallet server via <b>Certificate</b> field in <b>Settings - Protocols details - REST-protocol</b> section of <a href="https://kassa.qiwi.com">QIWI partners</a> web site).
 
 <ul class="nestedList notice_image">
    <li><h3>Details</h3>
@@ -155,7 +155,7 @@ Host: service.ru
 command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=Retail_Store&ccy=RUB&comment=test
 ~~~
 
-The login is taken from [Shop ID](#auth_param) parameter. To obtain password, click on **Change password** button in **Protocols details - REST-protocol** section of [QIWI partners](https://ishop.qiwi.com) web site.
+The login is taken from [Shop ID](#auth_param) parameter. To obtain password, click on **Change password** button in **Protocols details - REST-protocol** section of [QIWI partners](https://kassa.qiwi.com) web site.
 
 <ul class="nestedList">
     <li><h3>Details</h3>
@@ -245,7 +245,7 @@ echo $xmlres;
 ~~~
 
 <aside class="notice">
-Merchant should enable "Sign" flag in <b>Protocols details - REST-protocol</b>section of <a href="https://ishop.qiwi.com">QIWI partners</a> web site.
+Merchant should enable "Sign" flag in <b>Protocols details - REST-protocol</b>section of <a href="https://kassa.qiwi.com">QIWI partners</a> web site.
 
 <ul class="nestedList notice_image">
    <li><h3>Details</h3>

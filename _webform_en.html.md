@@ -35,7 +35,7 @@ Host: bill.qiwi.com
 
 Parameter|Description|Type|Required
 ---------|--------|---|---
-from | Merchant identifier ([Shop ID](#auth_param)). Identifier is specified in "HTTP-protocol" part of "Settings" section of merchant's account on ishop.qiwi.com.|Integer|+
+from | Merchant identifier ([Shop ID](#auth_param)). Identifier is specified in "HTTP-protocol" part of "Settings" section of merchant's account on kassa.qiwi.com.|Integer|+
 currency | Invoice currency identifier (in Alpha-3 ISO 4217 code). Any currency may be used if specified in agreement with QIWI Wallet. | String(3)|+
 to | QIWI Wallet client phone number to make the invoice. If not specified, client should enter the phone on the web invoice form.| String(20)|-
 summ | Amount of the invoice. Positive number rounded to two fractional digits. Point as a separator. If not specified, client should enter the amount on the web invoice form.| Number(6.2)|-

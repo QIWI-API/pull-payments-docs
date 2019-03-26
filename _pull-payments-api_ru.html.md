@@ -43,7 +43,7 @@ user@server:~$ curl "адрес сервера"
 ~~~
 
 <ul class="nestedList params">
-    <li><h3>Авторизация и работа с формами</h3><span>Данные могут быть получены на сайте <a href='http://kassa.qiwi.com'>QIWI Кассы</a> или <a href="https://ishop.qiwi.com">ishop.qiwi.com</a></span>
+    <li><h3>Авторизация и работа с формами</h3><span>Данные могут быть получены на сайте <a href='http://kassa.qiwi.com'>QIWI Кассы</a> 
     </li>
 </ul>
 
@@ -68,7 +68,7 @@ user@server:~$ curl "адрес сервера"
 </aside>
 
 <aside class="notice">
-Если у вас нет учетной записи в QIWI Кассе, то получить служебные данные можно на партнерском сайте <a href='http://ishop.qiwi.com'>ishop.qiwi.com</a> в разделе "Настройки"->"REST-протокол"->"Аутентификационные данные", "Сгенерировать новый ID".
+Если у вас нет учетной записи в QIWI Кассе, то получить служебные данные можно на партнерском сайте <a href='http://kassa.qiwi.com'>kassa.qiwi.com</a> в разделе "Настройки", "Сгенерировать новый ID".
 
 <ul class="nestedList notice_image">
     <li><h3>Подробнее</h3>
@@ -89,13 +89,10 @@ user@server:~$ curl "адрес сервера"
 <?php
 //Пример реализации запроса на PHP
 //Идентификатор магазина из вкладки "Данные магазина"
-//https://ishop.qiwi.com/options/http.action
 $SHOP_ID = "21379721";
 //API ID из вкладки "Данные магазина"
-//https://ishop.qiwi.com/options/rest.action
 $REST_ID = "62573819";
 //API пароль из вкладки "Данные магазина"
-//https://ishop.qiwi.com/options/rest.action
 $PWD = "**********";
 //ID счета
 $BILL_ID = "99111-ABCD-1-2-1";
@@ -166,7 +163,7 @@ qiwiRestApi.createBill( bill_id, fields ).then( data => {
     <li><h3>URL <span>https://api.qiwi.com/api/v2/prv/<a>prv_id</a>/bills/<a>bill_id</a></span></h3>
         <ul>
         <strong>В pathname PUT-запроса используются два параметра счета:</strong>
-             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте ishop.qiwi.com)</li>
+             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте kassa.qiwi.com)</li>
              <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера. Уникальность означает, что идентификатор должен отличаться от идентификаторов всех ранее выставленных счетов провайдера.</li>
         </ul>
     </li>
@@ -293,7 +290,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/21379721/bills/99111-ABCD-1
     <li><h3>URL <span>https://api.qiwi.com/api/v2/prv/<a>prv_id</a>/bills/<a>bill_id</a></span></h3>
         <ul>
         <strong>Параметры передаются в pathname.</strong>
-             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте ishop.qiwi.com)</li>
+             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте kassa.qiwi.com)</li>
              <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера.</li>
         </ul>
     </li>
@@ -398,7 +395,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/99111-ABCD-1-2
     <li><h3>URL <span>https://api.qiwi.com/api/v2/prv/<a>prv_id</a>/bills/<a>bill_id</a></span></h3>
         <ul>
         <strong>Параметры передаются в pathname.</strong>
-             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте ishop.qiwi.com)</li>
+             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте kassa.qiwi.com)</li>
              <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера.</li>
          </ul>
          <ul>
@@ -527,7 +524,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/893794793973/r
     <li><h3>URL <span>https://api.qiwi.com/api/v2/prv/<a>prv_id</a>/bills/<a>bill_id</a>/refund/<a>refund_id</a></span></h3>
         <ul>
         <strong>Параметры передаются в pathname.</strong>
-             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте ishop.qiwi.com)</li>
+             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте kassa.qiwi.com)</li>
              <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера.</li>
              <li><strong>refund_id</strong> - идентификатор операции, уникальный в рамках операций возврата счета <br> bill_id. Формат идентификатора: строка от 1 до 9 символов, содержащая только прописные или строчные латинские буквы (a-z, A-Z) и цифры от 0 до 9.</li>
         </ul>
@@ -628,7 +625,7 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/893794793973/r
     <li><h3>URL <span>https://api.qiwi.com/api/v2/prv/<a>prv_id</a>/bills/<a>bill_id</a>/refund/<a>refund_id</a></span></h3>
         <ul>
         <strong>Параметры передаются в pathname.</strong>
-             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте ishop.qiwi.com)</li>
+             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается на партнерском сайте kassa.qiwi.com)</li>
              <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера.</li>
              <li><strong>refund_id</strong> - идентификатор операции, уникальный в рамках операций возврата счета bill_id. Формат идентификатора: строка от 1 до 9 символов, содержащая только прописные или строчные латинские буквы (a-z, A-Z) и цифры от 0 до 9</li>
         </ul>
