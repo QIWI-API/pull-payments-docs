@@ -39,13 +39,14 @@ const qiwiRestApi = new QiwiPullAPI(prv_id, api_id, api_password);
 
 ~~~shell
 user@server:~$ curl "адрес сервера"
-  --header "Authorization: Basic MjMyNDQxMjM6NDUzRmRnZDQ0Mw=="
 ~~~
 
-<ul class="nestedList params">
-    <li><h3>Авторизация и работа с формами</h3><span>Данные могут быть получены на сайте <a href='http://kassa.qiwi.com'>QIWI Кассы</a> 
-    </li>
+  <ul class="nestedList params">
+    <li><h3>Авторизация и работа с формами</h3><span>Данные могут быть получены на сайте <a href='http://kassa.qiwi.com'>QIWI Кассы</a></span> 
+     </li>
 </ul>
+
+
 
 
 Параметр|Описание|Тип|Обяз.
@@ -524,12 +525,13 @@ user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/893794793973/r
     <li><h3>URL <span>https://api.qiwi.com/api/v2/prv/<a>prv_id</a>/bills/<a>bill_id</a>/refund/<a>refund_id</a></span></h3>
         <ul>
         <strong>Параметры передаются в pathname.</strong>
-             <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте kassa.qiwi.com)</li>
-             <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера.</li>
-             <li><strong>refund_id</strong> - идентификатор операции, уникальный в рамках операций возврата счета <br> bill_id. Формат идентификатора: строка от 1 до 9 символов, содержащая только прописные или строчные латинские буквы (a-z, A-Z) и цифры от 0 до 9.</li>
-        </ul>
-         <ul>
-         <strong>Параметр передается в body запроса.</strong>
+              <li><strong>prv_id</strong> - числовой идентификатор провайдера (идентификатор, который отображается в пункте "ID проекта" на партнерском сайте kassa.qiwi.com)</li>
+              <li><strong>bill_id</strong> - уникальный идентификатор счета в системе провайдера.</li>
+              <li><strong>refund_id</strong> - идентификатор операции, уникальный в рамках операций возврата счета bill_id. Формат идентификатора: строка от 1 до 9 символов, содержащая только прописные или строчные латинские буквы (a-z, A-Z) и цифры от 0 до 9.</li>
+         </ul>
+          <ul>
+          <strong>Параметр передается в body запроса.</strong>
+
              <li><strong>amount</strong> - сумма возврата. Должна быть меньше либо равна сумме счета <i>{bill_id}</i>, по которому производится возврат. Округляется в меньшую сторону до двух десятичных знаков.</li>
         </ul>
     </li>
