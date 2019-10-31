@@ -107,7 +107,7 @@ user | The QIWI Wallet user’s ID, to whom the invoice is issued. It is the use
 amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
 ccy | Invoice currency identifier (Alpha-3 ISO 4217 code). Depends on currencies allowed for the merchant. The following values are supported: RUB, EUR, USD, KZT | String(3)|Y
 comment | Comment to the invoice | String(255)|Y
-lifetime | Date and time up to which the invoice is available for payment. If the invoice is not paid by this date it will become void and will be assigned a final status.<br> **Important! Invoice will be automatically expired when 45 days is passed after the invoicing date**|`YYYY-MM-DDThh:mm:ss` URL-encoded|Y
+lifetime | Date and time up to which the invoice is available for payment, URL-encoded ISO 8601 (`YYYY-MM-DDThh:mm:ss`), Moscow timezone. If the invoice is not paid by this date it will become void and will be assigned a final status.<br> **Important! Invoice will be automatically expired when 45 days is passed after the invoicing date**|dateTime|Y
 pay_source |If the value is `mobile` the user’s MNO balance will be used as a funding source. If the value is `qw`, any other funding source is used available in QIWI Wallet system for the user. If parameter isn’t present, value `qw` is assumed |String |N
 prv_name|Merchant’s name| String(100)|N
 
