@@ -54,7 +54,7 @@ To obtain service data, open "Protocols - REST - Authorization" section on <a hr
 <ul class="nestedList notice_image">
     <li><h3>Details</h3>
         <ul>
-             <li><img src="/images/pull_rest_auth_en.png" /></li>
+             <li><img src="/images/pull_rest_auth_kassa.png" /></li>
         </ul>
     </li>
 </ul>

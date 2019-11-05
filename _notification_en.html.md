@@ -6,9 +6,9 @@ Notification is a POST-request (callback). The request's body contains all relev
 
 <h3 class="request method">Request → POST</h3>
 
-~~~shell
-Example
+> Example
 
+~~~shell
 user@server:~$ curl "https://service.ru/qiwi-notify.php"
   -v -w "%{http_code}"
   -X POST --header "Accept: text/xml"
@@ -23,23 +23,19 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
 </ul>
 
 <aside class="notice">
-To receive notifications, use **Turn on notifications** flag in **Settings** section of <a href="kassa.qiwi.com">QIWI partners web site</a>.
+To receive notifications, specify your notifications server URL in <b>Server notification</b> section of <b>Settings</b> section at <a href="kassa.qiwi.com">QIWI partners web site</a>.
 <ul class="nestedList notice_image">
     <li><h3>Details</h3>
-        <ul>
-             <li><img src="/images/pull_rest_notifications_en.png"/></li>
-        </ul>
+    <ul>
+         <li><img src="/images/pull_rest_auth_kassa.png"/></li>
+    </ul>
+    <ul>
+         <li><img src="/images/pull_rest_notifications_kassa.png"/></li>
+    </ul>
+    <ul>
+        <li>Click "Create password and save" to obtain <a href="#basic_notify">password</a> for notification Basic authorization</li>
+    </ul>
     </li>
-</ul>
-
-Specify notifications server URL in the same section.
-
-<ul class="nestedList notice_image">
-   <li><h3>Details</h3>
-        <ul>
-           <li><img src="/images/pull_rest_notification_url_en.png" /></li>
-        </ul>
-   </li>
 </ul>
 </aside>
 
@@ -74,6 +70,8 @@ command | Always `bill` by default | String |Y
 <aside class="notice">As new parameters of the invoice might be introduced on QIWI Wallet side, a list of invoice parameters in HTTP-request should not be fixed on the merchant's side and should be taken from the request itself.</aside>
 
 <h3 class="request">Response ←</h3>
+
+> Example of XML Response to notification
 
 ~~~xml
 HTTP/1.1 200 OK
@@ -132,7 +130,7 @@ If the client SSL-certificate is self-generated and is not issued by one of the 
 <ul class="nestedList notice_image">
    <li><h3>Details</h3>
         <ul>
-           <li><img src="/images/pull_rest_notification_cert_en.png" /></li>
+           <li><img src="/images/pull_rest_notifications_cert_kassa.png" /></li>
         </ul>
    </li>
 </ul>
@@ -145,6 +143,8 @@ The merchant's certificate is treated as trusted after the upload. Certificate m
 
 ## Basic authorization {#basic_notify}
 
+> Example of notification with Basic auth
+
 ~~~http
 POST /qiwi-notify.php HTTP/1.1
 Accept: text/xml
@@ -155,17 +155,19 @@ Host: service.ru
 command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=Retail_Store&ccy=RUB&comment=test
 ~~~
 
-The login is taken from [Shop ID](#auth_param) parameter. To obtain password, click on **Change password** button in **Protocols details - REST-protocol** section of [QIWI partners](https://kassa.qiwi.com) web site.
+The login is taken from [Shop ID](#auth_param) parameter. To obtain password, click on **Change notification password** button in **Protocols details - REST-protocol** section of [QIWI partners](https://kassa.qiwi.com) web site.
 
 <ul class="nestedList">
     <li><h3>Details</h3>
         <ul>
-             <li><img src="/images/pull_rest_notification_url_en.png" /></li>
+             <li><img src="/images/pull_rest_notifications_cert_kassa.png" /></li>
         </ul>
     </li>
 </ul>
 
 ## Authorization by signature {#sign_notify}
+
+> Example of notification with Signature
 
 ~~~http
 POST /qiwi-notify.php HTTP/1.1
@@ -245,12 +247,12 @@ echo $xmlres;
 ~~~
 
 <aside class="notice">
-Merchant should enable "Sign" flag in <b>Protocols details - REST-protocol</b>section of <a href="https://kassa.qiwi.com">QIWI partners</a> web site.
+Merchant should enable "Use HMAC sign instead of basic auth" flag in <b>Protocols details - REST-protocol</b>section of <a href="https://kassa.qiwi.com">QIWI partners</a> web site.
 
 <ul class="nestedList notice_image">
    <li><h3>Details</h3>
         <ul>
-           <li><img src="/images/pull_rest_notification_cert_en.png" /></li>
+           <li><img src="/images/pull_rest_notifications_kassa.png" /></li>
         </ul>
    </li>
 </ul>

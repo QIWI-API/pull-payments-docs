@@ -6,9 +6,9 @@
 
 <h3 class="request method">Запрос → POST</h3>
 
-~~~shell
-Пример
+> Пример
 
+~~~shell
 user@server:~$ curl "https://service.ru/qiwi-notify.php"
   -v -w "%{http_code}"
   -X POST --header "Accept: text/xml"
@@ -37,27 +37,6 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
             <li>Нажмите "Создать пароль и сохранить" для первичного получения <a href="#basic_notify">пароля</a> авторизации уведомлений</li>
         </ul>
     </li>
-</ul>
-</aside>
-
-<aside class="notice">
-Если вы пользуетесь партнерским сайтом kassa.qiwi.com, активируйте пункт "Включить уведомления" в разделе "Настройки".
-<ul class="nestedList notice_image">
-    <li><h3>Подробнее</h3>
-        <ul>
-             <li><img src="/images/pull_rest_notifications.png"/></li>
-        </ul>
-    </li>
-</ul>
-
-Aдрес сервера для уведомлений указывается в том же разделе.
-
-<ul class="nestedList notice_image">
-   <li><h3>Подробнее</h3>
-        <ul>
-           <li><img src="/images/pull_rest_notification_url.png" /></li>
-        </ul>
-   </li>
 </ul>
 </aside>
 
@@ -91,6 +70,8 @@ command | `bill` - всегда по умолчанию | String |+
 <aside class="notice">Так как для счета могут быть добавлены новые параметры на стороне QIWI Кошелька, то список параметров при обработке POST-запроса на стороне провайдера не должен фиксироваться.</aside>
 
 <h3 class="request">Ответ ←</h3>
+
+> Пример ответа на уведомление
 
 ~~~http
 HTTP/1.1 200 OK
@@ -157,20 +138,14 @@ Content-Type: text/xml
    </li>
 </ul>
 
-<ul class="nestedList notice_image">
-   <li><h3>Сайт kassa.qiwi.com, выбрать файл "Сертификат" в разделе "Настройки"</h3>
-        <ul>
-           <li><img src="/images/pull_rest_notification_cert.png" /></li>
-        </ul>
-   </li>
-</ul>
-
 После загрузки данный сертификат будет считаться доверенным. Сертификат должен быть в одном из следующих форматов:
 <ul><li>PEM (текстовый файл с расширением .pem) – (Privacy-enhanced Electronic Mail) закодированный BASE64 сертификат DER, помещенный между строками <i>-----BEGIN CERTIFICATE-----</i> и <i>-----END CERTIFICATE-----</i>.</li>
 <li>DER (файл с расширением.cer, .crt, .der) – обычно в бинарном формате DER, однако PEM сертификаты также допускаются с таким расширением.</li></ul>
 </aside>
 
 ### Basic-авторизация {#basic_notify}
+
+> Пример уведомления с Basic-авторизацией
 
 ~~~http
 POST /qiwi-notify.php HTTP/1.1
@@ -197,17 +172,60 @@ command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B790318
     </li>
 </ul>
 
-Для первичного получения или смены пароля на сайте kassa.qiwi.com, нажмите кнопку "Сменить пароль оповещения" в разделе "Настройки"->"REST-Протокол".
-
-<ul class="nestedList">
-    <li><h3>Подробнее</h3>
-        <ul>
-             <li><img src="/images/pull_rest_notifications_pass.png" /></li>
-        </ul>
-    </li>
-</ul>
 
 ### Авторизация по подписи {#sign_notify}
+
+> Пример уведомления с подписью
+
+~~~http
+POST /qiwi-notify.php HTTP/1.1
+Accept: text/xml
+Content-type: application/x-www-form-urlencoded
+X-Api-Signature: J4WNfNZd***V5mv2w=
+Host: service.ru
+
+command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
+~~~
+
+Для использования этого способа авторизации уведомлений, на сайте <a href="https://kassa.qiwi.com">QIWI Касса</a> достаточно активировать флаг "Использовать HMAC подпись вместо basic-авторизации".
+
+<ul class="nestedList notice_image">
+   <li><h3>Подробнее</h3>
+        <ul>
+           <li><img src="/images/pull_rest_notifications_kassa_sign.png" /></li>
+        </ul>
+   </li>
+</ul>
+
+Подпись уведомления отправляется в заголовке `X-Api-Signature`. Для формирования подписи используется механизм проверки целостности HMAC с хэш-функцией SHA1.
+
+* В качестве разделителей параметров используется символ `|`.
+* В подписи участвуют все параметры, которые присутствуют в исходном [запросе выставления счета](#invoice_rest).
+* Параметры для подписи переводятся в байт-представление с UTF-8 и располагаются в алфавитном порядке.
+* Ключ подписи равен [паролю](#basic_notify) для basic-авторизации уведомления.
+
+Алгоритм проверки подписи:
+
+1. Получить строку, содержащую значения всех параметров POST-запроса в алфавитном порядке перечисления параметров, разделенных символами `|`:
+
+   `{parameter1}|{parameter2}|…`
+
+   где `{parameter1}` – значение параметра уведомления. Все значения при проверке подписи должны трактоваться как строки.
+
+2. Cтроку и пароль для basic-авторизации уведомления преобразовать в байты с UTF-8.
+3. Вычислить HMAC-хэш c шифрованием SHA1:
+
+   `hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`
+   где:
+
+   * `Notification_password_bytes` – ключ функции (байт-представление basic-пароля для уведомлений);
+   * `Invoice_parameters_bytes` – байт-представление тела POST-запроса;
+   * `hash` – результат хэш-функции.
+
+4. HMAC-хэш преобразовать из строк в байты с использованием кодировки UTF-8 и base64-преобразовать.
+5. Сравнить значение заголовка `X-Api-Signature` с результатом 4.
+
+## Пример реализации {#notify_php}
 
 ~~~php
 <?php
@@ -274,69 +292,8 @@ $xmlres = <<<XML
 XML;
 echo $xmlres;
 ?>
+
 ~~~
-
-~~~http
-POST /qiwi-notify.php HTTP/1.1
-Accept: text/xml
-Content-type: application/x-www-form-urlencoded
-X-Api-Signature: J4WNfNZd***V5mv2w=
-Host: service.ru
-
-command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
-~~~
-
-Для использования этого способа авторизации уведомлений, на сайте <a href="https://kassa.qiwi.com">QIWI Касса</a> достаточно активировать флаг "Использовать HMAC подпись вместо basic-авторизации".
-
-<ul class="nestedList notice_image">
-   <li><h3>Подробнее</h3>
-        <ul>
-           <li><img src="/images/pull_rest_notifications_kassa_sign.png" /></li>
-        </ul>
-   </li>
-</ul>
-
-<aside class="notice">
-Если вы пользуетесь сайтом kassa.qiwi.com, активируйте флаг "Подпись" в разделе <b>"Настройки"</b>.
-
-<ul class="nestedList notice_image">
-   <li><h3>Подробнее</h3>
-        <ul>
-           <li><img src="/images/pull_rest_notification_cert.png" /></li>
-        </ul>
-   </li>
-</ul>
-</aside>
-
-Подпись уведомления отправляется в заголовке `X-Api-Signature`. Для формирования подписи используется механизм проверки целостности HMAC с хэш-функцией SHA1.
-
-* В качестве разделителей параметров используется символ `|`.
-* В подписи участвуют все параметры, которые присутствуют в исходном [запросе выставления счета](#invoice_rest).
-* Параметры для подписи переводятся в байт-представление с UTF-8 и располагаются в алфавитном порядке.
-* Ключ подписи равен [паролю](#basic_notify) для basic-авторизации уведомления.
-
-Алгоритм проверки подписи:
-
-1. Получить строку, содержащую значения всех параметров POST-запроса в алфавитном порядке перечисления параметров, разделенных символами `|`:
-
-   `{parameter1}|{parameter2}|…`
-
-   где `{parameter1}` – значение параметра уведомления. Все значения при проверке подписи должны трактоваться как строки.
-
-2. Cтроку и пароль для basic-авторизации уведомления преобразовать в байты с UTF-8.
-3. Вычислить HMAC-хэш c шифрованием SHA1:
-
-   `hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`
-   где:
-
-   * `Notification_password_bytes` – ключ функции (байт-представление basic-пароля для уведомлений);
-   * `Invoice_parameters_bytes` – байт-представление тела POST-запроса;
-   * `hash` – результат хэш-функции.
-
-4. HMAC-хэш преобразовать из строк в байты с использованием кодировки UTF-8 и base64-преобразовать.
-5. Сравнить значение заголовка `X-Api-Signature` с результатом 4.
-
-## Пример реализации {#notify_php}
 
 Пример на языке PHP реализует авторизацию уведомлений системы QIWI Wallet с проверкой цифровой подписи. Откройте вкладку _PHP_ справа.
 

@@ -15,7 +15,7 @@ services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>
 
 toc_footers:
- - <a href='/index-en.html'>Home page</a>
+ - <a href='/en/'>Home page</a>
 
 includes:
   - pull-payments/pull-payments-api_en
