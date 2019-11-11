@@ -23,7 +23,7 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
 </ul>
 
 <aside class="notice">
-To receive notifications, specify your notifications server URL in <b>Server notification</b> section of <b>Settings</b> section at <a href="kassa.qiwi.com">QIWI partners web site</a>.
+To receive notifications, specify your notifications server URL in <b>Server notification</b> section of <b>Settings</b> section at <a href="https://kassa.qiwi.com">QIWI partners web site</a>.
 <ul class="nestedList notice_image">
     <li><h3>Details</h3>
     <ul>
@@ -61,8 +61,8 @@ Parameter|Description|Type|Required
 bill_id |Merchant invoice number | String|Y
 status | [Current invoice status](#status)|String|Y
 amount | The invoice amount. The number is rounded down with two decimal places | Number(6.2)|Y
-user | The QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with "tel:" prefix | String|Y
-prv_name |  Merchant’s site name specified on kassa.qiwi.comm in "Settings" section | String|Y
+user | The QIWI Wallet user’s ID, to whom the invoice is issued. It is the user’s phone number with `tel:` prefix | String|Y
+prv_name |  Merchant’s site name specified on [kassa.qiwi.com](https://kassa.qiwi.com) in "Settings" section | String|Y
 ccy | Invoice currency identifier (Alpha-3 ISO 4217 code) | String(3)|Y
 comment | Comment to the invoice | String(255)|Y
 command | Always `bill` by default | String |Y
@@ -247,7 +247,7 @@ echo $xmlres;
 ~~~
 
 <aside class="notice">
-Merchant should enable "Use HMAC sign instead of basic auth" flag in <b>Protocols details - REST-protocol</b>section of <a href="https://kassa.qiwi.com">QIWI partners</a> web site.
+Merchant should enable "Use HMAC sign instead of basic auth" flag in <b>Protocols details - REST-protocol</b> section of <a href="https://kassa.qiwi.com">QIWI partners</a> web site.
 
 <ul class="nestedList notice_image">
    <li><h3>Details</h3>

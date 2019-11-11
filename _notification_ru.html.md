@@ -52,7 +52,7 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
 </ul>
 
 <ul class="nestedList params">
-    <li><h3>Параметры</h3><span>В теле запроса указываются параметры счета.</span>
+    <li><h3>Параметры</h3><span>В теле запроса уведомления указываются параметры счета.</span>
     </li>
 </ul>
 
@@ -61,8 +61,8 @@ user@server:~$ curl "https://service.ru/qiwi-notify.php"
 bill_id | Уникальный идентификатор счета в системе провайдера| String|+
 status | Текущий [статус счета](#status)|String|+
 amount | Сумма, на которую выставлялся счет, округленная до двух десятичных знаков | Number(6.2)|+
-user | Номер QIWI Кошелька, на который был выставлен счет | String|+
-prv_name |  Наименование проекта, указанное на сайте kassa.qiwi.comв разделе:"Настройки" | String|+
+user | Номер QIWI Кошелька, на который был выставлен счет, с префиксом `tel:` | String|+
+prv_name |  Наименование проекта, указанное на сайте [kassa.qiwi.com](https://kassa.qiwi.com) в разделе:"Настройки" | String|+
 ccy | Идентификатор валюты (Alpha-3 ISO 4217 код) | String(3)|+
 comment | Комментарий к счету | String(255)|+
 command | `bill` - всегда по умолчанию | String |+
@@ -139,7 +139,7 @@ Content-Type: text/xml
 </ul>
 
 После загрузки данный сертификат будет считаться доверенным. Сертификат должен быть в одном из следующих форматов:
-<ul><li>PEM (текстовый файл с расширением .pem) – (Privacy-enhanced Electronic Mail) закодированный BASE64 сертификат DER, помещенный между строками <i>-----BEGIN CERTIFICATE-----</i> и <i>-----END CERTIFICATE-----</i>.</li>
+<ul><li>PEM (текстовый файл с расширением .pem: Privacy-enhanced Electronic Mail) - закодированный BASE64 сертификат DER, помещенный между строками <i>-----BEGIN CERTIFICATE-----</i> и <i>-----END CERTIFICATE-----</i>.</li>
 <li>DER (файл с расширением.cer, .crt, .der) – обычно в бинарном формате DER, однако PEM сертификаты также допускаются с таким расширением.</li></ul>
 </aside>
 
@@ -157,7 +157,7 @@ Host: service.ru
 command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B79031811737&prv_name=Retail_Store&ccy=RUB&comment=test
 ~~~
 
-Логин равен [ID магазина](#auth_param).
+Логин равен [ID проекта](#auth_param).
 
 Для первичного получения или смены пароля на сайте [QIWI Касса](https://kassa.qiwi.com), нажмите кнопку "Создать пароль и сохранить" или "Сменить пароль оповещения", соответственно.
 
