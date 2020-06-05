@@ -4,6 +4,38 @@
 
 ## Последовательность операций {#steps}
 
+<!--
+<div class="mermaid">
+sequenceDiagram
+    participant Customer as Пользователь
+    participant Merchant as Провайдер
+    participant vqw as Сервис<br>QIWI Кошелек
+    participant checkout as Платежная<br>страница QIWI
+    Customer->>Merchant: Заказ товара
+    activate Merchant
+    Merchant->>vqw: Выставление счета
+    activate vqw
+    vqw->>Merchant: Информация о счете<br>и его статус
+    opt Рекомендуется выполнить для улучшения конверсий оплаты
+    Merchant-\->>Customer: Переадресация<br>на Платежную страницу
+    deactivate Merchant
+    Customer->>checkout: Оплата счета
+    checkout->>vqw: Платежная<br>транзакция
+    end
+    Note over Customer, vqw: Оплата счета
+    Customer->>vqw: Оплата счета на qiwi.com, QIWI Кошелек Android/iPhone<br>или в терминале QIWI
+    vqw->>vqw: Проведение платежа
+    opt Уведомление
+    vqw->>Merchant: Уведомление о статусе счета
+    activate Merchant
+    Merchant-\->>vqw: OK
+    deactivate vqw
+    deactivate Merchant
+    end
+    Merchant->>Customer: Выполнение заказа
+</div>
+-->
+
 ![Operation Flow](/images/pullrest_1.png)
 
 * Пользователь формирует заказ на сайте провайдера.
