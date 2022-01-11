@@ -135,10 +135,10 @@ $data = array(
     "user" => "tel:+" . $PHONE,
     "amount" => "1000.00",
     "ccy" => "RUB",
-    "comment" => "Все очень хорошо",
+    "comment" => "Товар из корзины",
     "lifetime" => "2015-01-30T15:35:00",
     "pay_source" => "qw",
-    "prv_name" => "Хороший магазин"
+    "prv_name" => "Магазин"
 );
 
 $ch = curl_init('https://api.qiwi.com/api/v2/prv/'.$SHOP_ID.'/bills/'.$BILL_ID);
@@ -248,7 +248,7 @@ Content-Type: text/json
         "status": "waiting",
         "error": 0,
         "user": "tel:+79191234567",
-        "comment": "Хороший магазин"
+        "comment": "Счет от магазина"
      }
   }
 }
@@ -354,7 +354,7 @@ Content-Type: text/json
         "status": "waiting",
         "error": 0,
         "user": "tel:+79031234567",
-        "comment": "test"
+        "comment": "Счет от магазина"
      }
   }
 }
@@ -464,7 +464,7 @@ Content-Type: text/json
          "status": "rejected",
          "error": 0,
          "user": "tel:+79031234567",
-         "comment": "test"
+         "comment": "Счет от магазина"
       }
    }
 }

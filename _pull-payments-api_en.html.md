@@ -130,7 +130,7 @@ $data = array(
     "user" => "tel:+" . $PHONE,
     "amount" => "1000.00",
     "ccy" => "RUB",
-    "comment" => "Good choice",
+    "comment" => "Good purchase",
     "lifetime" => "2015-01-30T15:35:00",
     "pay_source" => "qw",
     "prv_name" => "Special packages"
@@ -179,7 +179,7 @@ Content-Type: text/json
         "status": "waiting",
         "error": 0,
         "user": "tel:+79031234567",
-        "comment": "test"
+        "comment": "My comment"
      }
   }
 }
@@ -318,7 +318,7 @@ Content-Type: text/json
         "status": "waiting",
         "error": 0,
         "user": "tel:+79031234567",
-        "comment": "test"
+        "comment": "My comment"
      }
   }
 }
@@ -464,7 +464,7 @@ Content-Type: text/json
         "status": "rejected",
         "error": 0,
         "user": "tel:+79031234567",
-        "comment": "test"
+        "comment": "My comment"
      }
   }
 }
