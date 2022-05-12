@@ -6,7 +6,7 @@ Notification is a POST-request (callback). The request's body contains all relev
 
 <h3 class="request method">Request → POST</h3>
 
-> Example
+> Example of notification request
 
 ~~~shell
 user@server:~$ curl "https://example.com/qiwi-notify.php"
@@ -39,12 +39,11 @@ To receive notifications, specify your notifications server URL in <b>Server not
 </ul>
 </aside>
 
-
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
         <ul>
-             <li>Authorization: Basic *** - for <a href="#basic_notify">login/password authorization</a></li>
-             <li>X-Api-Signature: *** - for <a href="#sign_notify">digital signature authorization</a></li>
+             <li>Authorization: Basic XXX - for <a href="#basic_notify">login/password authorization</a></li>
+             <li>X-Api-Signature: XXX - for <a href="#sign_notify">digital signature authorization</a></li>
              <li>Accept: text/json</li>
              <li>Content-type: application/x-www-form-urlencoded</li>
         </ul>
@@ -71,7 +70,7 @@ command | Always `bill` by default | String |Y
 
 <h3 class="request">Response ←</h3>
 
-> Example of XML Response to notification
+> Example of XML response to notification
 
 ~~~xml
 HTTP/1.1 200 OK
@@ -93,12 +92,10 @@ Response must be in XML format.
     </li>
 </ul>
 
-
 <ul class="nestedList params">
     <li><h3>Parameters</h3>
     </li>
 </ul>
-
 
 XML Tag|Description
 --------|--------
@@ -122,7 +119,7 @@ To receive notifications merchant must whitelist following IP subnets connected 
 
 ## Authorization on Merchant's Server {#notifications_auth}
 
-Merchant's server should use [basic-authorization](#basic_notify) or [authorization by signature](#sign_notify). Merchant may also use client SSL certificate verification (self-signed cerificates may be used as well). QIWI Wallet server certificate should be verified in HTTPS requests.
+Merchant's server should use [basic-authorization](#basic_notify) or [authorization by signature](#sign_notify). Merchant may also use client SSL certificate verification (self-signed certificates may be used as well). QIWI Wallet server certificate should be verified in HTTPS requests.
 
 <aside class="notice">
 If the client SSL-certificate is self-generated and is not issued by one of the standard certification centers, this certificate should be uploaded to the QIWI Wallet server via <b>Certificate</b> field in <b>Settings - Protocols details - REST-protocol</b> section of <a href="https://kassa.qiwi.com">QIWI partners</a> web site).
@@ -178,6 +175,8 @@ Host: example.com
 
 command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B78000005122&prv_name=Test&ccy=RUB&comment=Some+Descriptor
 ~~~
+
+> Example of notification processing with signature check
 
 ~~~php
 <?php

@@ -43,8 +43,8 @@ user@server:~$ curl "https://example.com/qiwi-notify.php"
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
         <ul>
-             <li>Authorization: Basic *** - для авторизации по <a href="#basic_notify">логину/паролю</a></li>
-             <li>X-Api-Signature: *** - для авторизации по <a href="#sign_notify">цифровой подписи</a></li>
+             <li>Authorization: Basic XXX - для авторизации по <a href="#basic_notify">логину/паролю</a></li>
+             <li>X-Api-Signature: XXX - для авторизации по <a href="#sign_notify">цифровой подписи</a></li>
              <li>Accept: text/xml</li>
              <li>Content-type: application/x-www-form-urlencoded</li>
         </ul>
@@ -62,7 +62,7 @@ bill_id | Уникальный идентификатор счета в сист
 status | Текущий [статус счета](#status)|String|+
 amount | Сумма, на которую выставлялся счет, округленная до двух десятичных знаков | Number(6.2)|+
 user | Номер QIWI Кошелька, на который был выставлен счет, с префиксом `tel:` | String|+
-prv_name |  Наименование проекта, указанное на сайте [kassa.qiwi.com](https://kassa.qiwi.com) в разделе:"Настройки" | String|+
+prv_name |  Название проекта, указанное на сайте [kassa.qiwi.com](https://kassa.qiwi.com) в разделе:"Настройки" | String|+
 ccy | Идентификатор валюты (Alpha-3 ISO 4217 код) | String(3)|+
 comment | Комментарий к счету | String(255)|+
 command | `bill` - всегда по умолчанию | String |+
@@ -92,7 +92,6 @@ Content-Type: text/xml
         </ul>
     </li>
 </ul>
-
 
 <ul class="nestedList params">
     <li><h3>Параметры</h3>
@@ -169,7 +168,6 @@ command=bill&bill_id=BILL-1&status=paid&error=0&amount=1.00&user=tel%3A%2B790318
     </li>
 </ul>
 
-
 ### Авторизация по подписи {#sign_notify}
 
 > Пример уведомления с подписью
@@ -209,7 +207,7 @@ command=bill&bill_id=LocalTest17&status=paid&error=0&amount=0.01&user=tel%3A%2B7
 
    где `{parameter1}` – значение параметра уведомления. Все значения при проверке подписи должны трактоваться как строки.
 
-2. Cтроку и пароль для basic-авторизации уведомления преобразовать в байты с UTF-8.
+2. Строку и пароль для basic-авторизации уведомления преобразовать в байты с UTF-8.
 3. Вычислить HMAC-хэш c шифрованием SHA1:
 
    `hash = HMAС(SHA1, Notification_password_bytes, Invoice_parameters_bytes)`

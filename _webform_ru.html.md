@@ -25,7 +25,7 @@
 </ul>
 
 ~~~http
-GET /order/external/create.action?txn_id=10000&from=11223&summ=1.11&successUrl=http%3A%2F%2Ftest.ru%3Fcurrency=643 HTTP/1.1
+GET /order/external/create.action?txn_id=10000&from=11223&summ=1.11&successUrl=http%3A%2F%2Fexample.com%3Fcurrency=643 HTTP/1.1
 Host: bill.qiwi.com
 ~~~
 

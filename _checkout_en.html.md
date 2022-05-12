@@ -2,20 +2,17 @@
 
 ###### Last update: 2017-11-14 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_en.html.md)
 
-Merchant may offer the user to pay the invoice immediately by redirecting to the QIWI Wallet Сheckout page via the HTTP GET-request.
+Merchant may offer the user to pay the invoice immediately by redirecting to the QIWI Wallet Checkout page via the HTTP GET-request.
 
-~~~text
-QIWI Checkout page
-~~~
 ~~~http
-GET /form?shop=2042&transaction=1234567&successUrl=http%3A%2F%2Fmystore.com%2Fsuccess%3Fa%3D1%26b%3D2&failUrl=http%3A%2F%2Fmystore.com%2Ffail%3Fa%3D1%26b%3D2&pay_source=qw HTTP/1.1
+GET /form?shop=2042&transaction=1234567&successUrl=http%3A%2F%example.com%2Fsuccess%3Fa%3D1%26b%3D2&failUrl=http%3A%2F%example.com%2Ffail%3Fa%3D1%26b%3D2&pay_source=qw HTTP/1.1
 Host: oplata.qiwi.com
 ~~~
 
 <h3 class="request method">Request → REDIRECT</h3>
 
 <ul class="nestedList url">
-    <li><h3>URL <span>https:// oplata.qiwi.com/form</span></h3>
+    <li><h3>URL <span>https://oplata.qiwi.com/form</span></h3>
     </li>
 </ul>
 
@@ -30,7 +27,6 @@ If the merchant uses invoicing <a href="#webform_en">web form</a>, this redirect
     </li>
 </ul>
 
-
 Parameter|Type|Description|Required
 ---------|--------|---|------
 shop| string |Merchant's ID in QIWI Wallet system, corresponds to **prv_id** parameter [used to create the bill](#invoice).|Y
@@ -42,19 +38,18 @@ pay_source |string| Default payment method to show first on the page for the use
 
 ## Redirection to Merchant Site {#back_url}
 
-~~~text
-Redirect when transaction is successfully created
-~~~
+> Redirect when transaction is successfully created
+
 ~~~http
 GET /success?a=1&b=2&order=1234567 HTTP/1.1
-Host: mystore.com
+Host: example.com
 ~~~
-~~~text
-Redirect when creation of transaction is unsuccessful
-~~~
+
+> Redirect when creation of transaction is unsuccessful
+
 ~~~http
 GET /fail?a=1&b=2&order=1234567 HTTP/1.1
-Host: mystore.com
+Host: example.com
 ~~~
 
 <aside class="notice">

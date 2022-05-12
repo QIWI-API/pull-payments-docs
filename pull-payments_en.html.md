@@ -9,7 +9,8 @@ metadescription: This API provides access to operations with invoices in QIWI Wa
 
 language_tabs:
   - http
-  - php
+  - php: PHP
+  - shell: cURL
 
 services:
  - <a href='#'>Swagger</a>  |  <a href='#'>Qiwi Demo</a>

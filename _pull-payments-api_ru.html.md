@@ -1,6 +1,6 @@
 # Pull REST API {#pull-payments-api_ru}
 
-###### Последнее обновление: 2018-05-03 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_ru.html.md)
+###### Последнее обновление: 2022-05-03 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_ru.html.md)
 
 ## Последовательность операций {#steps}
 
@@ -56,7 +56,6 @@ sequenceDiagram
 
 * [NODE JS SDK](https://github.com/QIWI-API/pull-payments-node-js-sdk) - Пакет готовых решений для разработки server2server интеграций для приема платежей на вашем сайте c помощью Node.js.
 
-
 ## Авторизация {#auth_param}
 
 Все запросы мерчанта к Pull REST API авторизуются посредством HTTP basic-авторизации. Для авторизации используются API ID и API password. Заголовок представляет собой параметр `Authorization`, значение которого представлено как: `Basic Base64(API_ID:API_PASSWORD)`
@@ -74,12 +73,9 @@ user@server:~$ curl "адрес сервера"
 ~~~
 
   <ul class="nestedList params">
-    <li><h3>Авторизация и работа с формами</h3><span>Данные могут быть получены на сайте <a href='http://kassa.qiwi.com'>QIWI Кассы</a></span> 
+    <li><h3>Авторизация и работа с формами</h3><span>Данные могут быть получены на сайте <a href='http://kassa.qiwi.com'>QIWI Кассы</a></span>
      </li>
 </ul>
-
-
-
 
 Параметр|Описание|Тип|Обяз.
  ---------|--------|---|------
@@ -113,10 +109,11 @@ user@server:~$ curl "адрес сервера"
 
 </aside>
 
-
 ## Выставление счета за покупку {#invoice_rest}
 
 Запрос выставляет новый счет на указанный номер телефона (номер кошелька QIWI Wallet).
+
+<h3 class="request method">Запрос → PUT</h3>
 
 ~~~php
 <?php
@@ -158,8 +155,8 @@ echo curl_error($ch);
 curl_close ($ch);
 //Необязательный редирект пользователя
 $url = 'https://oplata.qiwi.com/order/external/main.action?shop='.$SHOP_ID.'&
-transaction='.$BILL_ID.'&successUrl=http%3A%2F%2Fieast.ru%2Findex.php%3Froute%3D
-payment%2Fqiwi%2Fsuccess&failUrl=http%3A%2F%2Fieast.ru%2Findex.php%3Froute%3D
+transaction='.$BILL_ID.'&successUrl=http%3A%2F%2Fexample.com%2Findex.php%3Froute%3D
+payment%2Fqiwi%2Fsuccess&failUrl=http%3A%2F%2Fexample.com%2Findex.php%3Froute%3D
 payment%2Fqiwi%2Ffail&pay_source=card';
 echo '<br><br><b><a href="'.$url.'">Ссылка переадресации для оплаты счета</a></b>';
 ?>
@@ -182,8 +179,6 @@ qiwiRestApi.createBill( bill_id, fields ).then( data => {
     //do with data
 });
 ~~~
-
-<h3 class="request method">Запрос → PUT</h3>
 
 ~~~shell
   user@server:~$ curl "https://api.qiwi.com/api/v2/prv/373712/bills/99111-ABCD-1-2-1"
@@ -232,7 +227,6 @@ prv_name|Название провайдера.| String(100)|-
 
 Данный пример иллюстрирует, когда и где в запросах к системе QIWI Wallet используются [авторизационные данные](#auth_param) провайдера, а именно, идентификатор магазина, API ID и пароль к API.
 
-
 <h3 class="request">Ответ ←</h3>
 
 ~~~http
@@ -253,6 +247,7 @@ Content-Type: text/json
   }
 }
 ~~~
+
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
@@ -264,9 +259,7 @@ Content-Type: text/json
 }
 ~~~
 
-
 Формат ответа зависит от заголовка "Accept" в исходном запросе:
-
 
 <ul class="nestedList header">
     <li><h3>HEADERS</h3>
@@ -277,13 +270,10 @@ Content-Type: text/json
     </li>
 </ul>
 
-
-
 <ul class="nestedList params">
     <li><h3>Параметры</h3>
     </li>
 </ul>
-
 
 Параметр|Тип|Описание
 --------|---|--------
@@ -359,6 +349,7 @@ Content-Type: text/json
   }
 }
 ~~~
+
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
@@ -398,8 +389,6 @@ bill.status|String|Текущий [статус счета](#status)
 bill.error|Integer|Константа, всегда `0`
 bill.user|String|Идентификатор кошелька пользователя, которому выставлен счет (номер телефона в международном формате с префиксом `tel:`)
 bill.comment|String|Комментарий к счету
-
-
 
 ## Отмена неоплаченного счета {#cancel}
 
@@ -469,6 +458,7 @@ Content-Type: text/json
    }
 }
 ~~~
+
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
@@ -506,7 +496,6 @@ bill.status|String|Текущий [статус счета](#status)
 bill.error|Integer|Константа, всегда `0`
 bill.user|String|Идентификатор кошелька пользователя, которому выставлен счет (номер телефона в международном формате с префиксом `tel:`)
 bill.comment|String|Комментарий к счету
-
 
 ## Возврат оплаченного счета {#refund}
 
@@ -597,6 +586,7 @@ Content-Type: text/json
    }
 }
 ~~~
+
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: text/json
@@ -728,10 +718,7 @@ refund.amount|String|Сумма к возврату. Положительное 
 refund.status|String|Текущий [статус операции возврата](#status_refund)
 refund.error|Integer|[Код ошибки](#errors) при проведении возврата платежа. В случае если сумма, переданная в запросе, превышает сумму самого счета либо сумму счета, оставшуюся после предыдущих возвратов, в ответе будет возвращен код ошибки 242.
 
-
 ## Статусы операций {#status}
-
-###### Последнее обновление: 2017-07-11 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_ru.html.md)
 
 ### Статусы оплаты счетов {#status_bills}
 
@@ -741,8 +728,7 @@ waiting | Счет выставлен, ожидает оплаты или опл
 paid|Счет оплачен|+
 rejected|Счет отклонен|+
 unpaid|Ошибка при проведении оплаты. Счет не оплачен|+
-expired	|Время жизни счета истекло. Счет не оплачен|+
-
+expired|Время жизни счета истекло. Счет не оплачен|+
 
 ## Статусы операции возврата {#status_refund}
 
@@ -754,11 +740,9 @@ fail|Платеж неуспешен|+
 
 ## Список ошибок {#errors}
 
-###### Последнее обновление: 2017-07-11 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_ru.html.md)
-
 Код| Описание |Fatal*
 ---|----------|------
-0|Успех	|
+0|Успех|
 5|Неверные данные в параметрах запроса|+
 13|Сервер занят, повторите запрос позже|-
 78|Недопустимая операция|+
@@ -778,8 +762,10 @@ fail|Платеж неуспешен|+
 341|Обязательный параметр указан неверно или отсутствует в запросе|+
 700|Превышен месячный лимит на операции|+
 774|Кошелек временно заблокирован|-
+934|Регион не поддерживается|+
 1001|Запрещенная валюта для провайдера|+
 1003|Не удалось получить курс конвертации для данной пары валют|-
+1018|Страна не поддерживается|+
 1019|Не удалось определить сотового оператора для мобильной коммерции|+
 1419|Нельзя изменить данные счета – он уже оплачивается или оплачен|+
 
