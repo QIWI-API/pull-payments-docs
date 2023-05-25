@@ -1,6 +1,6 @@
 # Форма оплаты {#checkout_ru}
 
-###### Последнее обновление: 2018-02-07 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_ru.html.md)
+###### [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_ru.html.md)
 
 Провайдер может предложить пользователю немедленно оплатить счет с помощью переадресации на платежную форму.
 

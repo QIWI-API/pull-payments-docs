@@ -1,6 +1,6 @@
 # Pull REST API {#pull-payments-api_ru}
 
-###### Последнее обновление: 2022-05-03 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_ru.html.md)
+###### [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_ru.html.md)
 
 ## Последовательность операций {#steps}
 

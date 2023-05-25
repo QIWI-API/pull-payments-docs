@@ -1,6 +1,6 @@
 # Checkout {#checkout_en}
 
-###### Last update: 2017-11-14 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_checkout_en.html.md)
 
 Merchant may offer the user to pay the invoice immediately by redirecting to the QIWI Wallet Checkout page via the HTTP GET-request.
 

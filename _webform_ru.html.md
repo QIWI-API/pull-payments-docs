@@ -1,6 +1,6 @@
 # Форма выставления счета {#webform_ru}
 
-###### Последнее обновление: 2017-11-15 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_webform_ru.html.md)
+###### [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_webform_ru.html.md)
 
 Клиенту отображается платежная форма с выбором способа оплаты выставленного счета.
 

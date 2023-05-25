@@ -1,6 +1,6 @@
 # Online Invoicing Web Form {#webform_en}
 
-###### Last update: 2017-11-15 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_webform_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_webform_en.html.md)
 
 Client receives a web form with selection of appropriate payment methods for the invoice.
 

@@ -30,7 +30,7 @@ includes:
 
 # Прием платежей {#introduction}
 
-###### Последнее обновление: 2017-05-31 | [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pull-payments_ru.html.md)
+###### [Редактировать на GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pull-payments_ru.html.md)
 
 QIWI Wallet Pull API открывает доступ к операциям со счетами в системе QIWI Wallet из вашего приложения. Поддерживаются следующие операции:
 

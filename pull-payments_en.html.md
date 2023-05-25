@@ -28,7 +28,7 @@ includes:
 
 # Pull Payments {#intro}
 
-###### Last update: 2017-11-15 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pull-payments_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/pull-payments_en.html.md)
 
 QIWI Pull Payments API opens a way to operations with QIWI Wallet invoices from your service. The following operations are supported:
 

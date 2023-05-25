@@ -1,6 +1,6 @@
 # Pull REST API {#pull_rest_api}
 
-###### Last update: 2022-05-03 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_pull-payments-api_en.html.md)
 
 ## Invoicing Operation Flow
 

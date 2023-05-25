@@ -1,6 +1,6 @@
 # Notifications {#notification_en}
 
-###### Last update: 2017-11-14 | [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_en.html.md)
+###### [Edit on GitHub](https://github.com/QIWI-API/pull-payments-docs/blob/master/_notification_en.html.md)
 
 Notification is a POST-request (callback). The request's body contains all relevant data of the invoice serialized as HTTP-request parameters and encoded by UTF-8 plus parameter `command=bill`.
 
